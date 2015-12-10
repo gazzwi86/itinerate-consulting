@@ -39,10 +39,10 @@ module.exports = function(app) {
     secret: config.secrets.session,
     saveUninitialized: true,
     resave: false,
-    store: new mongoStore({
-      mongooseConnection: mongoose.connection,
-      db: 'itinerate-consulting'
-    })
+    // store: new mongoStore({
+    //   mongooseConnection: mongoose.connection,
+    //   db: 'itinerate-consulting'
+    // })
   }));
 
   /**

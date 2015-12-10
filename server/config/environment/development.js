@@ -5,11 +5,11 @@
 module.exports = {
 
   // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/itinerateconsulting-dev'
-  },
+  // mongo: {
+  //   uri: 'mongodb://localhost/itinerateconsulting-dev'
+  // },
 
   // Seed database on startup
-  seedDB: true
+  // seedDB: true
 
 };
