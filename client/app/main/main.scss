@@ -1,27 +1,54 @@
-.thing-form {
-  margin: 20px 0;
+.navbar-brand {
+  padding: 0 10px;
+
+  .navLogo {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 #banner {
-  border-bottom: none;
-  margin-top: -20px;
-}
-
-#banner h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-
-.hero-unit {
   position: relative;
   padding: 30px 15px;
   color: #F5F5F5;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #4393B9;
+  background: #0093d0;
+  border-bottom: none;
+  margin-top: -20px;
+
+  h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  a {
+    text-decoration: none;
+    &:active, &:hover, &:link, &:visited {
+      color: #fff;
+    }
+  }
+}
+
+.folioImg {
+  width: 100%;
+  border: #0093d0 1px solid;
 }
 
 .navbar-text {
   margin-left: 15px;
+}
+
+.ngdialog-content {
+  width: 90% !important;
+  max-width: 830px !important;
+
+  .dialogImg, .dialogTxt {
+    width: 100%;
+  }
+
+  .dialogImg {
+    margin-top: 20px;
+  }
 }

@@ -5,7 +5,8 @@ angular.module('itinerateConsultingApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngDialog'
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider
