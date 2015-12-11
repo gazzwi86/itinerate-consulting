@@ -35,8 +35,14 @@ Running `npm test` will run the unit tests with karma.
 
 ## Deploying to Heroku
 
+Initially:
 ```
 $ heroku create
 $ git push heroku master
 $ heroku open
+```
+
+Thereafter:
+```
+$ grunt build && grunt buildcontrol:heroku
 ```

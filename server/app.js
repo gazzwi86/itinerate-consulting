@@ -4,6 +4,7 @@
 
 'use strict';
 
+import newrelic from 'newrelic';
 import express from 'express';
 import mongoose from 'mongoose';
 import config from './config/environment';
