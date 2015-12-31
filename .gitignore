@@ -11,3 +11,4 @@ npm-debug.log
 Dockerfile
 docker-compose.yml
 newrelic_agent.log
+.DS_Store
