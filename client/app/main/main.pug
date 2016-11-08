@@ -1,0 +1,62 @@
+header#banner.section
+  div.container
+    img(src="assets/images/logo-invert.png" alt="Itinerate Consulting")
+    
+    h1 Itinerate Consulting
+    
+    p.col-xs-8.col-xs-offset-2.lead A micro-consultancy with a passion for all things digital, we create websites, apps and digital fixtures that get you results
+    
+    h4.col-xs-12
+      a(href="mailto:enquiries@itinerateconsulting.com") enquiries@itinerateconsulting.com
+      span(style="padding: 0 5px;") | 
+      a(href="tel: 0420770993") +61 420 770 993
+    
+    p.col-xs-12
+      a.social(href="http://github.com/gazzwi86" target="_blank") #[i.fa.fa-github]
+      a.social(href="https://www.linkedin.com/in/gareth-williams-aa405314" target="_blank") #[i.fa.fa-linkedin]
+      a.social(href="https://twitter.com/gazzwi86" target="_blank") #[i.fa.fa-twitter]
+
+div
+  section#services.section
+    div.container
+      h2.page-header Services
+      div.col-xs-12.col-sm-6.col-md-4.col-lg-3.service(ng-repeat="item in $ctrl.services")
+        img.folioImg(src="{{ item.src }}" alt="{{ item.title }}")
+        h3 {{ item.title }}
+        p {{ item.desc }}
+
+  section#work.section
+    div.container
+      h2.page-header Work
+      article.col-xs-12.col-sm-6.col-md-4.col-lg-3.work(ng-repeat="item in $ctrl.work" ng-click="$ctrl.desc(item, false)")
+        h3 #[img.folioImg(src="{{ item.src }}" alt="{{ item.title }}")]
+        h4 {{ item.title }}
+        h5 {{ item.project }}
+  
+  section#testimonials.section
+    div.container
+      h2.page-header Testimonials
+      div.testimonial.col-xs-12.col-sm-10(ng-repeat="item in $ctrl.testimonials")
+        div.img.col-xs-12.col-sm-2
+          img(src="{{ item.img }}" alt="{{ item.title }}")
+        article.col-xs-12.col-sm-10
+          p.text {{ item.text }}
+          h4 {{ item.person }}, {{ item.title }}
+
+  section#contact.section
+    div.container
+      h2.page-header Contact
+      
+      h3 Get in touch via:
+      h4 Email: #[a(href="mailto:enquiries@itinerateconsulting.com") enquiries@itinerateconsulting.com]
+      h4 Telephone: #[a(href="tel:+61420770993") +61 420 770 993]
+      
+      h3 Or fire off a quick one here:
+      form.col-xs-12.col-sm-6.col-md-4.row(method="POST" action="http://formspree.io/enquiries@itinerateconsulting.com")
+        fieldset
+          .form-group
+            input.form-control(type="email" name="email" placeholder="Your email")
+          .form-group
+            textarea.form-control(name="message" rows="10" placeholder="Your message")
+          .form-group
+            button.btn.btn-primary(type="submit") Send

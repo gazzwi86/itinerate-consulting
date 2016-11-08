@@ -1,6 +1,22 @@
-footer.footer {
+.footer {
+  position: relative;
   text-align: center;
-  padding: 30px 0;
-  margin-top: 70px;
+  padding: 10px 0;
   border-top: 1px solid #E5E5E5;
+  z-index: 2;
+  background: #fff;
+  font-size: 12px;
+
+  .social {
+  	padding: 0 5px;
+  	font-size: 1.8em;
+  }
+
+  p {
+  	margin-bottom: 5px;
+  }
+  
+  p:last-child {
+  	margin-bottom: 0;
+  }
 }

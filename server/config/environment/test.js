@@ -1,12 +1,13 @@
 'use strict';
+/*eslint no-process-env:0*/
 
 // Test specific configuration
 // ===========================
 module.exports = {
   // MongoDB connection options
-  // mongo: {
-  //   uri: 'mongodb://localhost/itinerateconsulting-test'
-  // },
+  mongo: {
+    uri: 'mongodb://localhost/itinerateconsulting-test'
+  },
   sequelize: {
     uri: 'sqlite://',
     options: {

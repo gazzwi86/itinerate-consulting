@@ -1,3 +1,10 @@
 'use strict';
 
-angular.module('itinerateConsultingApp.util', []);
+import angular from 'angular';
+import {
+  UtilService
+} from './util.service';
+
+export default angular.module('itinerateConsultingApp.util', [])
+  .factory('Util', UtilService)
+  .name;

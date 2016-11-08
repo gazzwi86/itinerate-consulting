@@ -1,0 +1,20 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 1.5em;
+
+  .navbar-brand {
+    padding: 0 10px;
+    z-index: 2;
+
+    .navLogo {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  a.navbar-link {
+    cursor: pointer;
+  }
+}

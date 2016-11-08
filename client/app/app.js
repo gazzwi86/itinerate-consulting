@@ -1,18 +1,37 @@
 'use strict';
 
-angular.module('itinerateConsultingApp', [
-  'itinerateConsultingApp.constants',
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
-  'ngDialog'
-])
-  .config(function($routeProvider, $locationProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+import angular from 'angular';
+// import ngAnimate from 'angular-animate';
+import ngCookies from 'angular-cookies';
+import ngResource from 'angular-resource';
+import ngSanitize from 'angular-sanitize';
 
-    $locationProvider.html5Mode(true);
+const ngRoute = require('angular-route');
+
+import uiBootstrap from 'angular-ui-bootstrap';
+// import ngMessages from 'angular-messages';
+
+
+import {
+  routeConfig
+} from './app.config';
+
+import navbar from '../components/navbar/navbar.component';
+import footer from '../components/footer/footer.component';
+import main from './main/main.component';
+import constants from './app.constants';
+import util from '../components/util/util.module';
+
+import './app.scss';
+
+angular.module('itinerateConsultingApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap,
+  navbar, footer, main, constants, util
+])
+  .config(routeConfig);
+
+angular.element(document)
+  .ready(() => {
+    angular.bootstrap(document, ['itinerateConsultingApp'], {
+      strictDi: true
+    });
   });

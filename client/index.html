@@ -1,18 +1,15 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <base href="/">
-    <title>Itinerate Consulting</title>
+    <title>Itinerate Consulting - web development that will get you noticed</title>
     <meta name="viewport" content="width=device-width">
 
     <!-- Standard meta stuff -->
-    <meta name="keywords" content="melbourne, australia, freelance, hire, contractor, creative, technologist, web, development, developer, programmer, website, php, mysql, html5, css3, javascript, CMS">
-    <meta name="description" content="Melbourne based micro-consultancy with a passion for all things digital and electronic. Working with HTML5, CSS3, Node.js, Arduino, Raspberry Pi, PHP, Linux and much much more, to ensure you get the best reulst for your company.">
+    <meta name="keywords" content="website, mobile, app, freelance, contractor, technologist, web development, web design, developer, programmer, website, php, mysql, html5, css3, javascript, CMS, wordpress, angularjs">
+    <meta name="description" content="A micro-consultancy with a passion for all things digital. We create digital platforms that will get your company results, from websites, to apps and even digital fixtures.">
     <meta name="author" content="Gareth Williams">
 
     <!-- Apple device mobile settings -->
@@ -30,14 +27,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="http://www.itinerateconsulting.com">
     <meta property="og:title" content="Itinerate Consulting">
-    <meta property="og:description" content="Melbourne based micro-consultancy with a passion for all things digital and electronic. Working with HTML5, CSS3, Node.js, Arduino, Raspberry Pi, PHP, Linux and much much more, to ensure you get the best reulst for your company.">
+    <meta property="og:description" content="A micro-consultancy with a passion for all things digital. We create digital platforms that will get your company results, from websites, to apps and even digital fixtures.">
     <meta property="og:image" content="apple-touch-icon.png">
 
     <!-- Twitter card -->
     <meta property="twitter:card" content="summary">
-    <!-- <meta property="twitter:site" content="@gazzwi86"> -->
+    <meta property="twitter:site" content="@gazzwi86">
     <meta property="twitter:title" content="Itinerate Consulting">
-    <meta property="twitter:description" content="Melbourne based micro-consultancy with a passion for all things digital and electronic. Working with HTML5, CSS3, Node.js, Arduino, Raspberry Pi, PHP, Linux and much much more, to ensure you get the best reulst for your company.">
+    <meta property="twitter:description" content="A micro-consultancy with a passion for all things digital. We create digital platforms that will get your company results, from websites, to apps and even digital fixtures.">
     <meta property="twitter:image" content="apple-touch-icon.png">
 
     <!-- Turn off pin it button -->
@@ -46,26 +43,11 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" >
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-    <!-- build:css(client) app/vendor.css -->
-      <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
-      <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-      <link rel="stylesheet" href="app/app.css">
-      <!-- injector:css -->
-      <!-- endinjector -->
-    <!-- endbuild -->
-  </head>
-  <body ng-app="itinerateConsultingApp">
-    <!--[if lt IE 7]>
+</head>
+<body>
+    <!--[if lt IE 9]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    <!-- Add your site or application content here -->
-    <div ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -74,39 +56,13 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-71294321-1', 'auto');
+      ga('create', 'UA-71294321-1');
       ga('send', 'pageview');
     </script>
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- build:js({client,node_modules}) app/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-route/angular-route.js"></script>
-      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-      <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:js(.tmp) app/app.js -->
-      <script src="app/app.js"></script>
-      <!-- injector:js -->
-      <script src="components/util/util.module.js"></script>
-      <script src="app/app.constant.js"></script>
-      <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
-      <script src="components/footer/footer.directive.js"></script>
-      <script src="components/navbar/navbar.controller.js"></script>
-      <script src="components/navbar/navbar.directive.js"></script>
-      <script src="components/util/util.service.js"></script>
-      <!-- endinjector -->
-    <!-- endbuild -->
-  </body>
+    <div id="bg"></div>
+    <navbar></navbar>
+    <div ng-view=""></div>
+    <footer></footer>
+<script type="text/javascript" src="/vendor.bundle.js"></script><script type="text/javascript" src="/polyfills.bundle.js"></script><script type="text/javascript" src="/app.bundle.js"></script></body>
 </html>
