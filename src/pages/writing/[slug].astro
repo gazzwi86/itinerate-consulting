@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro'
+import { getSortedPosts, postSlug, formatDate } from '../../lib/posts'
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts()
+  return posts.map(post => ({
+    params: { slug: postSlug(post.id) },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { title, date, summary, canonicalUrl: externalUrl, platform, tags } = post.data
+const formatted = formatDate(date)
+// The page's own URL is canonical — the external URL is the "read on platform" destination
+const selfUrl = new URL(`/writing/${postSlug(post.id)}`, Astro.site).href
+---
+
+<Base
+  title={title}
+  description={summary}
+  canonicalUrl={selfUrl}
+  type="article"
+  article={{ publishedTime: date.toISOString(), tags }}
+>
+  <article class="post-page">
+    <div class="container post-inner">
+      <header class="post-header">
+        <div class="post-meta">
+          <a href="/writing" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
+            </svg>
+            All writing
+          </a>
+          <span class="divider">·</span>
+          <time datetime={date.toISOString()}>{formatted}</time>
+          <span class="platform-badge platform-pill">{platform}</span>
+        </div>
+        <h1>{title}</h1>
+        <div class="post-tags">
+          {tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </header>
+
+      <div class="post-summary">
+        <p>{summary}</p>
+      </div>
+
+      <div class="post-cta">
+        <p>This piece is published on {platform}. Read the full article there.</p>
+        <a
+          href={externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn"
+        >
+          Read the full piece on {platform} →
+        </a>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .post-page { padding: 4rem 0 6rem; }
+
+  .post-inner { max-width: 720px; }
+
+  .post-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--accent);
+    font-weight: 500;
+    transition: gap 0.15s;
+  }
+
+  .back-link:hover { gap: 0.5rem; }
+
+  .divider { color: var(--border); }
+
+  .platform-badge { /* styles in global.css .platform-pill */ }
+
+  .post-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.15;
+  }
+
+  .post-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+
+  .post-summary {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .post-summary p {
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: none;
+  }
+
+  .post-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .post-cta p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: none;
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import { formatDate } from '../lib/posts'
+
+interface Props {
+  title: string
+  date: Date
+  summary: string
+  canonicalUrl: string
+  platform: string
+  tags: string[]
+  slug: string
+}
+
+const { title, date, summary, canonicalUrl, platform, tags, slug } = Astro.props
+const formatted = formatDate(date)
+---
+
+<article class="card">
+  <div class="card-meta">
+    <time datetime={date.toISOString()}>{formatted}</time>
+    <span class="card-platform platform-pill">{platform}</span>
+  </div>
+
+  <h2 class="card-title">
+    <a href={`/writing/${slug}`}>{title}</a>
+  </h2>
+
+  <p class="card-summary">{summary}</p>
+
+  <div class="card-footer">
+    <div class="card-tags">
+      {tags.map(tag => <span class="tag">{tag}</span>)}
+    </div>
+    <a href={canonicalUrl} target="_blank" rel="noopener noreferrer" class="card-read">
+      Read on {platform}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+      </svg>
+    </a>
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(91, 106, 208, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .card-platform { /* styles in global.css .platform-pill */ }
+
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .card-title a {
+    color: var(--text);
+    transition: color 0.15s;
+  }
+
+  .card-title a:hover { color: var(--accent); }
+
+  .card-summary {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    max-width: none;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+
+  .card-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--accent);
+    transition: gap 0.15s;
+  }
+
+  .card-read:hover { gap: 0.5rem; }
+</style>

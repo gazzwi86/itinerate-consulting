@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro'
+---
+
+<Base title="Page not found" description="This page doesn't exist.">
+  <div class="container not-found">
+    <div class="not-found-inner">
+      <span class="code">404</span>
+      <h1>Page not found.</h1>
+      <p>That page doesn't exist. It may have moved or never been here at all.</p>
+      <div class="actions">
+        <a href="/" class="btn">Back home</a>
+        <a href="/writing" class="btn btn-ghost">Read the writing</a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .not-found {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 0;
+  }
+
+  .not-found-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 480px;
+  }
+
+  .code {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  h1 { font-size: 2rem; }
+
+  p { color: var(--muted); font-size: 1.05rem; max-width: 40ch; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

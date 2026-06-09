@@ -1,0 +1,21 @@
+{
+  "name": "itinerate-consulting",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sync-notion": "npx tsx scripts/sync-from-notion.ts",
+    "deploy": "npm run build && aws s3 sync dist/ s3://itinerateconsulting-website --delete --profile gazzwi86 && aws cloudfront create-invalidation --distribution-id E9P3PRXXBCWXS --paths '/*' --profile gazzwi86"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@notionhq/client": "^5.22.0",
+    "astro": "^6.4.4"
+  }
+}

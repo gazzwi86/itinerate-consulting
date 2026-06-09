@@ -1,0 +1,185 @@
+---
+import { SOCIAL, CONTACT_EMAIL } from '../config/site'
+
+const onWriting = Astro.url.pathname.startsWith('/writing')
+
+const navLinks = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#about', label: 'About' },
+  { href: '/writing', label: 'Writing' },
+]
+
+const socialLinks = [
+  {
+    href: SOCIAL.linkedin,
+    label: 'LinkedIn',
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+  },
+  {
+    href: SOCIAL.substack,
+    label: 'Substack',
+    icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08zM1.46 10.812V24L12 18.11 22.54 24V10.812zM22.54 0H1.46v2.836h21.08z"/></svg>`,
+  },
+  {
+    href: SOCIAL.medium,
+    label: 'Medium',
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>`,
+  },
+]
+---
+
+<header class="nav-wrap">
+  <nav class="container nav">
+    <a href="/" class="nav-logo" aria-label="Itinerate Consulting home">
+      <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="40" height="40" rx="9" fill="#5B6AD0"/>
+        <rect x="17" y="19" width="6" height="14" rx="2" fill="white"/>
+        <rect x="17" y="10" width="6" height="6" rx="2" fill="#6BCFBA"/>
+      </svg>
+      <span class="nav-wordmark">itinerate</span>
+    </a>
+
+    <ul class="nav-links">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a href={href} class:list={['nav-link', { 'nav-link--active': href === '/writing' && onWriting }]}>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="nav-right">
+      <div class="nav-social">
+        {socialLinks.map(({ href, label, icon }) => (
+          <a
+            href={href}
+            class="nav-social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            title={label}
+            set:html={icon}
+          />
+        ))}
+        <!-- Email icon - assembled by JS -->
+        <a
+          href="#"
+          class="nav-social-link"
+          data-u={CONTACT_EMAIL.u}
+          data-d={CONTACT_EMAIL.d}
+          aria-label="Email Gareth"
+          title="Email"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <a href="/#contact" class="nav-cta btn">
+        Get in touch
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<style>
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 247, 245, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .nav-wordmark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    letter-spacing: -0.03em;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.125rem;
+    margin-left: auto;
+  }
+
+  .nav-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 0.375rem 0.625rem;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .nav-link:hover,
+  .nav-link--active {
+    color: var(--text);
+    background: var(--border);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .nav-social {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .nav-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--muted);
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .nav-social-link:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .nav-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .nav-social { display: none; }
+    .nav-right { margin-left: auto; }
+  }
+</style>

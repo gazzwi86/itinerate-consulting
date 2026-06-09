@@ -1,0 +1,117 @@
+---
+import '../styles/global.css'
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_URL, AUTHOR, SOCIAL } from '../config/site'
+
+interface Props {
+  title: string
+  description: string
+  canonicalUrl?: string
+  ogImage?: string
+  type?: 'website' | 'article'
+  article?: { publishedTime: string; tags: string[] }
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  ogImage = '/og-default.png',
+  type = 'website',
+  article,
+} = Astro.props
+
+const siteName = 'Itinerate Consulting'
+const fullTitle = title === siteName ? title : `${title} - ${siteName}`
+const ogImageUrl = new URL(ogImage, Astro.site)
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {article && (
+      <>
+        <meta property="article:published_time" content={article.publishedTime} />
+        {article.tags.map(tag => <meta property="article:tag" content={tag} />)}
+      </>
+    )}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(
+      type === 'article'
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: title,
+            description,
+            url: canonicalUrl,
+            author: {
+              '@type': 'Person',
+              name: 'Gareth Williams',
+              url: 'https://itinerateconsulting.com/about',
+            },
+          }
+        : {
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Gareth Williams',
+            url: 'https://itinerateconsulting.com',
+            jobTitle: 'Independent Technology Consultant',
+            worksFor: { '@type': 'Organization', name: 'Itinerate Consulting' },
+            sameAs: [SOCIAL.linkedin, SOCIAL.substack, SOCIAL.medium],
+          }
+    )} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,450;0,14..32,500;1,14..32,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+  <script>
+    /* Single global handler for all obfuscated email links */
+    document.querySelectorAll<HTMLAnchorElement>('[data-u][data-d]').forEach(el => {
+      const addr = `${el.dataset.u}@${el.dataset.d}`
+      el.href = `mailto:${addr}`
+      // Only replace text if it's a display-only text node — not if it contains child elements (e.g. SVG icons)
+      if (el.children.length === 0 && el.textContent?.includes('[at]')) {
+        el.textContent = addr
+      }
+    })
+  </script>
+</html>
