@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://itinerateconsulting.com'
+export const SITE_URL = 'https://www.itinerateconsulting.com'
 
 export const SOCIAL = {
   linkedin: 'https://www.linkedin.com/in/gareth-williams-solutions-consultant/',
