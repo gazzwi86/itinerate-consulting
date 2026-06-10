@@ -1,5 +1,4 @@
 export const SITE_URL = 'https://itinerateconsulting.com'
-export const AUTHOR = 'Gareth Williams'
 
 export const SOCIAL = {
   linkedin: 'https://www.linkedin.com/in/gareth-williams-solutions-consultant/',

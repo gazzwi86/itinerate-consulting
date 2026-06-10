@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro'
 import { getSortedPosts, postSlug } from '../lib/posts'
 import PostCard from '../components/PostCard.astro'
-import { SOCIAL, CONTACT_EMAIL } from '../config/site'
+import { SITE_URL, SOCIAL, CONTACT_EMAIL } from '../config/site'
 
 const posts = await getSortedPosts()
 
@@ -118,7 +118,7 @@ const talks = [
         <div class="newsletter-embed newsletter-embed--writing">
           <p class="section-label newsletter-label">Get Prompt to Prod in your inbox</p>
           <form class="newsletter-form" action="https://prompttoprod.substack.com/api/v1/free" method="post" target="_blank">
-            <input type="hidden" name="first_url" value="https://itinerateconsulting.com">
+            <input type="hidden" name="first_url" value={SITE_URL}>
             <input type="hidden" name="first_referrer" value="">
             <div class="newsletter-row">
               <input type="email" name="email" placeholder="your@email.com" required class="newsletter-input" aria-label="Email address">
@@ -140,8 +140,8 @@ const talks = [
         <p>
           I write and speak about what AI means for the people building software - the craft,
           the architecture, the governance and the risks most adoption skips. Plain,
-          practitioner, no hype. Based in Australia; happy to do remote podcasts and talks
-          anywhere, in-person around Melbourne.
+          practitioner, no hype. Based in Australia; remote podcasts and talks worldwide,
+          in-person around Melbourne. Available for first bookings.
         </p>
       </div>
 
@@ -285,7 +285,7 @@ const talks = [
         </p>
         <p>I typically respond within one business day.</p>
 
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/REPLACE_ME" method="POST">
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/xrevlydy" method="POST">
           <input type="text" name="_gotcha" tabindex="-1" aria-hidden="true" style="display:none">
 
           <div class="form-field">
@@ -596,8 +596,6 @@ if (form) {
     gap: 1.125rem;
   }
 
-  .section-cta { margin-top: 2.25rem; }
-
   /* Contact */
   .contact-inner {
     display: grid;
@@ -615,19 +613,6 @@ if (form) {
   .contact-text h2 { font-size: clamp(1.75rem, 3vw, 2.375rem); margin: 0.25rem 0; }
 
   .contact-text p { color: var(--muted); line-height: 1.7; max-width: 52ch; }
-
-  .contact-details { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem; }
-
-  .contact-item { display: flex; flex-direction: column; gap: 0.2rem; }
-
-  .contact-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-  }
 
   .contact-link {
     font-size: 1rem;
@@ -799,10 +784,6 @@ if (form) {
     white-space: nowrap;
   }
 
-  /* Newsletter embed */
-  .newsletter-section {
-    padding: 2.5rem 0;
-  }
 
   .newsletter-embed {
     display: flex;

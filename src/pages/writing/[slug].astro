@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro'
 import { getSortedPosts, postSlug, formatDate } from '../../lib/posts'
+import { SITE_URL } from '../../config/site'
 
 export async function getStaticPaths() {
   const posts = await getSortedPosts()
@@ -36,17 +37,16 @@ const selfUrl = new URL(`/writing/${postSlug(post.id)}/`, Astro.site).href
     url: selfUrl,
     datePublished: date.toISOString(),
     dateModified: date.toISOString().split('T')[0],
-    image: 'https://itinerateconsulting.com/og-default.png',
     mainEntityOfPage: { '@type': 'WebPage', '@id': selfUrl },
     author: {
       '@type': 'Person',
       name: 'Gareth Williams',
-      url: 'https://itinerateconsulting.com',
+      url: SITE_URL,
     },
     publisher: {
       '@type': 'Organization',
       name: 'Itinerate Consulting',
-      url: 'https://itinerateconsulting.com',
+      url: SITE_URL,
     },
   })} />
   <article class="post-page">

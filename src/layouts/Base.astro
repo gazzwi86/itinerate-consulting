@@ -8,7 +8,6 @@ interface Props {
   title: string
   description: string
   canonicalUrl?: string
-  ogImage?: string
   type?: 'website' | 'article'
   article?: { publishedTime: string; tags: string[] }
 }
@@ -17,14 +16,12 @@ const {
   title,
   description,
   canonicalUrl = Astro.url.href,
-  ogImage = '/og-default.png',
   type = 'website',
   article,
 } = Astro.props
 
 const siteName = 'Itinerate Consulting'
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`
-const ogImageUrl = new URL(ogImage, Astro.site)
 ---
 
 <!doctype html>
@@ -44,13 +41,11 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content={siteName} />
-    <meta property="og:image" content={ogImageUrl} />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
 
     {article && (
       <>
@@ -63,7 +58,7 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- JSON-LD: Person + WebSite (home page only; article pages add BlogPosting inline) -->
-    {new URL(canonicalUrl).pathname === '/' && (
+    {Astro.url.pathname === '/' && (
       <>
         <script type="application/ld+json" set:html={JSON.stringify({
           '@context': 'https://schema.org',
@@ -73,7 +68,7 @@ const ogImageUrl = new URL(ogImage, Astro.site)
           jobTitle: 'Principal Solutions Architect',
           description: 'Writer behind Prompt to Prod. Practitioner focused on agentic engineering, AI governance and shipping AI in production.',
           knowsAbout: ['Agentic Engineering', 'AI-Native Architecture', 'AI Governance', 'Engineering Leadership', 'Comprehension Debt'],
-          worksFor: { '@type': 'Organization', name: 'Itinerate Consulting', url: SITE_URL },
+          worksFor: { '@type': 'Organization', name: siteName, url: SITE_URL },
           sameAs: [SOCIAL.linkedin, SOCIAL.newsletter, SOCIAL.medium],
         })} />
         <script type="application/ld+json" set:html={JSON.stringify({
