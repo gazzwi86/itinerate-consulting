@@ -117,9 +117,7 @@ const talks = [
         </div>
         <div class="newsletter-embed newsletter-embed--writing">
           <p class="section-label newsletter-label">Get Prompt to Prod in your inbox</p>
-          <div class="newsletter-row">
-            <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=writing-section`} target="_blank" rel="noopener noreferrer" class="btn">Subscribe on Substack <span aria-hidden="true">→</span></a>
-          </div>
+          <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=writing-section`} target="_blank" rel="noopener noreferrer" class="btn newsletter-btn">Subscribe on Substack <span aria-hidden="true">→</span></a>
           <p class="newsletter-fine">Free newsletter. Unsubscribe any time.</p>
         </div>
       </div>
@@ -355,9 +353,15 @@ if (wire) {
 /* ── CONTACT FORM (Formspree AJAX) ──────────────────────── */
 const form = document.getElementById('contact-form')
 if (form) {
+  const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
+  const errEl = document.getElementById('form-error')
+  const resetBtn = (msg: string) => {
+    btn.disabled = false
+    btn.textContent = 'Send enquiry'
+    if (errEl) errEl.textContent = msg
+  }
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
-    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
     btn.disabled = true
     btn.textContent = 'Sending...'
     try {
@@ -369,16 +373,10 @@ if (form) {
       if (res.ok) {
         form.innerHTML = '<div class="form-success"><p>Thanks - I\'ll be in touch within one business day.</p></div>'
       } else {
-        btn.disabled = false
-        btn.textContent = 'Send enquiry'
-        const errEl = document.getElementById('form-error')
-        if (errEl) errEl.textContent = 'Something went wrong. Please try again or check back later.'
+        resetBtn('Something went wrong. Please try again or check back later.')
       }
     } catch {
-      btn.disabled = false
-      btn.textContent = 'Send enquiry'
-      const errEl = document.getElementById('form-error')
-      if (errEl) errEl.textContent = 'Could not reach the server. Please try again later.'
+      resetBtn('Could not reach the server. Please try again later.')
     }
   })
 }
@@ -779,9 +777,7 @@ if (form) {
     margin: 0;
   }
 
-  .newsletter-row {
-    display: flex;
-    gap: 0.625rem;
+  .newsletter-btn {
     max-width: 480px;
   }
 
