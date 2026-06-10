@@ -373,13 +373,14 @@ if (form) {
       if (res.ok) {
         form.innerHTML = `<div class="form-success">
   <div class="form-success-icon" aria-hidden="true">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="14" cy="14" r="14" fill="currentColor" opacity="0.12"/>
-      <path d="M8 14.5l4.5 4.5 7.5-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 10.5l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-  <h3 class="form-success-heading">Message sent</h3>
-  <p>Thanks — I'll be in touch within one business day.</p>
+  <div class="form-success-body">
+    <h3 class="form-success-heading">Message sent</h3>
+    <p>Thanks — I'll be in touch within one business day.</p>
+  </div>
 </div>`
       } else {
         resetBtn('Something went wrong. Please try again or check back later.')
@@ -871,39 +872,6 @@ if (form) {
 
   .form-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.375rem; }
 
-  .form-success {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 2rem 2rem 2rem 1.75rem;
-    background: var(--mint-light);
-    border: 1px solid rgba(107, 207, 186, 0.4);
-    border-left: 3px solid var(--mint);
-    border-radius: var(--radius-sm);
-  }
-
-  .form-success-icon {
-    color: var(--mint);
-    line-height: 1;
-  }
-
-  .form-success-icon svg { display: block; }
-
-  .form-success-heading {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text);
-    margin: 0.25rem 0 0;
-  }
-
-  .form-success p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.9375rem;
-    max-width: none;
-    line-height: 1.5;
-  }
 
   /* Testimonials */
   .testimonials-grid {
