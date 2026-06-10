@@ -62,31 +62,29 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(
-      type === 'article'
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: title,
-            description,
-            url: canonicalUrl,
-            author: {
-              '@type': 'Person',
-              name: 'Gareth Williams',
-              url: 'https://itinerateconsulting.com/about',
-            },
-          }
-        : {
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            name: 'Gareth Williams',
-            url: 'https://itinerateconsulting.com',
-            jobTitle: 'Independent Technology Consultant',
-            worksFor: { '@type': 'Organization', name: 'Itinerate Consulting' },
-            sameAs: [SOCIAL.linkedin, SOCIAL.substack, SOCIAL.medium],
-          }
-    )} />
+    <!-- JSON-LD: Person + WebSite (article pages add BlogPosting inline) -->
+    {type !== 'article' && (
+      <>
+        <script type="application/ld+json" set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Gareth Williams',
+          url: SITE_URL,
+          jobTitle: 'Principal Solutions Architect',
+          description: 'Writer behind Prompt to Prod. Practitioner focused on agentic engineering, AI governance and shipping AI in production.',
+          knowsAbout: ['Agentic Engineering', 'AI-Native Architecture', 'AI Governance', 'Engineering Leadership', 'Comprehension Debt'],
+          worksFor: { '@type': 'Organization', name: 'Itinerate Consulting', url: SITE_URL },
+          sameAs: [SOCIAL.linkedin, SOCIAL.newsletter, SOCIAL.medium],
+        })} />
+        <script type="application/ld+json" set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: siteName,
+          url: SITE_URL,
+          description: 'Writer, speaker and practitioner on agentic engineering and AI in production.',
+        })} />
+      </>
+    )}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -103,6 +101,30 @@ const ogImageUrl = new URL(ogImage, Astro.site)
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-3C0BDFJ691');
+    </script>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        var ctaMap = {
+          'Invite me on your podcast': 'podcast',
+          'Book me to speak': 'speaking',
+          'Commission a guest piece': 'guest_piece',
+          'Subscribe': 'subscribe',
+          'Read the writing': 'read_writing',
+        };
+        document.body.addEventListener('click', function(e) {
+          var link = e.target.closest('a[href]');
+          if (!link) return;
+          var href = link.href || '';
+          var text = (link.textContent || '').trim().replace(/\s+/g, ' ').substring(0, 80);
+          var ctaKey = Object.keys(ctaMap).find(function(k) { return text.startsWith(k); });
+          if (ctaKey) {
+            gtag('event', 'cta_click', { cta_type: ctaMap[ctaKey] });
+          }
+          if (href && href.indexOf('itinerateconsulting.com') === -1 && href.indexOf('#') !== 0 && href.indexOf('mailto:') !== 0) {
+            gtag('event', 'outbound_click', { destination: href, link_text: text });
+          }
+        });
+      });
     </script>
   </head>
   <body>

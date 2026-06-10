@@ -13,6 +13,10 @@ interface Props {
 
 const { title, date, summary, canonicalUrl, platform, tags, slug } = Astro.props
 const formatted = formatDate(date)
+const isOwnPlatform = canonicalUrl.includes('substack.com') || canonicalUrl.includes('medium.com')
+const readUrl = isOwnPlatform
+  ? `${canonicalUrl}${canonicalUrl.includes('?') ? '&' : '?'}utm_source=itinerate&utm_medium=referral&utm_campaign=writing-card`
+  : canonicalUrl
 ---
 
 <article class="card">
@@ -21,9 +25,9 @@ const formatted = formatDate(date)
     <span class="card-platform platform-pill">{platform}</span>
   </div>
 
-  <h2 class="card-title">
+  <h3 class="card-title">
     <a href={`/writing/${slug}`}>{title}</a>
-  </h2>
+  </h3>
 
   <p class="card-summary">{summary}</p>
 
@@ -31,7 +35,7 @@ const formatted = formatDate(date)
     <div class="card-tags">
       {tags.map(tag => <span class="tag">{tag}</span>)}
     </div>
-    <a href={canonicalUrl} target="_blank" rel="noopener noreferrer" class="card-read">
+    <a href={readUrl} target="_blank" rel="noopener noreferrer" class="card-read">
       Read on {platform}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M7 17L17 7M17 7H7M17 7v10"/>

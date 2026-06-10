@@ -41,7 +41,7 @@ const socialLinks = [
       <div>
         <h3>Writing</h3>
         <ul>
-          {socialLinks.map(l => <li><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a></li>)}
+          {socialLinks.map(l => <li><a href={`${l.href}${(l.label === 'Substack' || l.label === 'Medium') ? '?utm_source=itinerate&utm_medium=referral&utm_campaign=footer' : ''}`} target="_blank" rel="noopener noreferrer">{l.label}</a></li>)}
         </ul>
       </div>
     </nav>

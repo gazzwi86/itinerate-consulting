@@ -51,7 +51,7 @@ const socialLinks = [
       <div class="nav-social">
         {socialLinks.map(({ href, label, icon }) => (
           <a
-            href={href}
+            href={`${href}${(label === 'Substack' || label === 'Medium') ? '?utm_source=itinerate&utm_medium=referral&utm_campaign=nav' : ''}`}
             class="nav-social-link"
             target="_blank"
             rel="noopener noreferrer"

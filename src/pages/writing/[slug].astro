@@ -24,6 +24,24 @@ const selfUrl = new URL(`/writing/${postSlug(post.id)}`, Astro.site).href
   type="article"
   article={{ publishedTime: date.toISOString(), tags }}
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: summary,
+    url: selfUrl,
+    datePublished: date.toISOString(),
+    author: {
+      '@type': 'Person',
+      name: 'Gareth Williams',
+      url: 'https://itinerateconsulting.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Itinerate Consulting',
+      url: 'https://itinerateconsulting.com',
+    },
+  })} />
   <article class="post-page">
     <div class="container post-inner">
       <header class="post-header">
