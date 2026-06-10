@@ -203,8 +203,8 @@ main { flex: 1; }
 
 .btn-tertiary {
   background: transparent;
-  color: var(--muted);
-  border: 1.5px solid var(--border);
+  color: var(--text);
+  border: 1.5px solid #A1A1AA;
   font-size: 0.875rem;
 }
 .btn-tertiary:hover {
