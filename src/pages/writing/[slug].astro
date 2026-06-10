@@ -18,7 +18,7 @@ const readUrl = isOwnPlatform
   : externalUrl
 const formatted = formatDate(date)
 // The page's own URL is canonical — the external URL is the "read on platform" destination
-const selfUrl = new URL(`/writing/${postSlug(post.id)}`, Astro.site).href
+const selfUrl = new URL(`/writing/${postSlug(post.id)}/`, Astro.site).href
 ---
 
 <Base
@@ -35,6 +35,9 @@ const selfUrl = new URL(`/writing/${postSlug(post.id)}`, Astro.site).href
     description: summary,
     url: selfUrl,
     datePublished: date.toISOString(),
+    dateModified: date.toISOString().split('T')[0],
+    image: 'https://itinerateconsulting.com/og-default.png',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': selfUrl },
     author: {
       '@type': 'Person',
       name: 'Gareth Williams',

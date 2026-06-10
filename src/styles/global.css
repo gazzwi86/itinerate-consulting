@@ -32,6 +32,10 @@
 .fade-up-3 { animation-delay: 0.19s; }
 .fade-up-4 { animation-delay: 0.26s; }
 
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { animation: none; opacity: 1; transform: none; }
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

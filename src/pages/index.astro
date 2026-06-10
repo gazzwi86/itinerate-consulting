@@ -6,29 +6,6 @@ import { SOCIAL, CONTACT_EMAIL } from '../config/site'
 
 const posts = await getSortedPosts()
 
-const services = [
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m.7 11.4-.7-.7M6.3 18.4l-.7.7"/></svg>`,
-    title: 'Agentic engineering',
-    desc: 'Designing and building AI agent systems, evaluation frameworks and production pipelines. From proof-of-concept to something that ships.',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    title: 'Engineering leadership',
-    desc: 'Scaling teams, establishing engineering practices and driving delivery when it matters most.',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
-    title: 'Hiring and team building',
-    desc: 'Sourcing, assessing and onboarding engineering talent at every level. Finding the right people and setting them up to succeed.',
-  },
-  {
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-    title: 'Strategy and advisory',
-    desc: 'AI readiness assessments, cloud architecture and DevSecOps for organisations modernising at pace. Practical, not theoretical.',
-  },
-]
-
 const testimonials = [
   // { quote: '...', author: 'Name', role: 'Title, Company' },
 ]
@@ -36,34 +13,34 @@ const testimonials = [
 const talks = [
   {
     title: 'Comprehension debt',
-    desc: 'When AI writes faster than your team can understand — the structural risk no one is pricing in.',
+    desc: 'When AI writes faster than your team can understand - the structural risk no one is pricing in.',
     href: '/topics/comprehension-debt',
   },
   {
     title: 'Your AI has your keys',
-    desc: 'The employee-clone problem — non-human identity and why AI agents need their own security model.',
+    desc: 'The employee-clone problem - non-human identity and why AI agents need their own security model.',
     href: '/topics/ai-governance',
   },
   {
     title: 'Ontologies for agents',
-    desc: 'Why your AI stalls without a model of your business — and how to build one.',
+    desc: 'Why your AI stalls without a model of your business - and how to build one.',
     href: '/topics/ai-native-architecture',
   },
   {
     title: 'Agentic engineering',
-    desc: 'The craft nobody is teaching yet — what changes when you design the system that writes the code.',
+    desc: 'The craft nobody is teaching yet - what changes when you design the system that writes the code.',
     href: '/topics/agentic-engineering',
   },
   {
     title: 'Prototype-driven development',
-    desc: 'An SDLC for the AI age — the best spec is a tested prototype, not a document.',
+    desc: 'An SDLC for the AI age - the best spec is a tested prototype, not a document.',
     href: '/topics/engineering-craft',
   },
 ]
 ---
 
 <Base
-  title="Gareth Williams — Writer & Speaker on Agentic Engineering"
+  title="Gareth Williams - Agentic Engineering Writer"
   description="Gareth Williams writes Prompt to Prod and speaks about agentic engineering, AI governance and what it takes to ship AI in production. Writer, speaker, practitioner."
 >
 
@@ -74,15 +51,14 @@ const talks = [
         I build with AI.<br />I write about what that actually changes.
       </h1>
       <p class="hero-sub fade-up fade-up-2">
-        Gareth Williams. Principal Solutions Architect and the writer behind
-        <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="hero-inline-link">Prompt to Prod</a>.
-        15+ years building software across banking, energy, government and retail —
-        now focused on agentic engineering, AI governance and what it takes to ship AI in production.
-        Plain, practitioner, no hype.
+        Gareth Williams. Writer of
+        <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="hero-inline-link">Prompt to Prod</a>
+        and practitioner with 15+ years building software across banking, energy, government and retail.
+        Now focused on agentic engineering, AI governance and what it takes to ship AI in production. No hype.
       </p>
       <div class="hero-actions fade-up fade-up-3">
         <a href="#writing" class="btn">Read the writing <span aria-hidden="true">→</span></a>
-        <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Subscribe</a>
+        <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="hero-sub-link">Subscribe to Prompt to Prod <span aria-hidden="true">→</span></a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
     </div>
@@ -101,24 +77,6 @@ const talks = [
       <span class="proof-label">Based in Australia. Working globally.</span>
     </div>
   </div>
-
-  <!-- ── NEWSLETTER (after proof belt) ─────────────────────────── -->
-  <section class="newsletter-section">
-    <div class="container">
-      <div class="newsletter-embed">
-        <p class="section-label newsletter-label">Get Prompt to Prod in your inbox</p>
-        <form class="newsletter-form" action="https://prompttoprod.substack.com/api/v1/free" method="post" target="_blank">
-          <input type="hidden" name="first_url" value="https://itinerateconsulting.com">
-          <input type="hidden" name="first_referrer" value="">
-          <div class="newsletter-row">
-            <input type="email" name="email" placeholder="your@email.com" required class="newsletter-input" aria-label="Email address">
-            <button type="submit" class="btn newsletter-btn">Subscribe</button>
-          </div>
-          <p class="newsletter-fine">Free newsletter. Unsubscribe any time.</p>
-        </form>
-      </div>
-    </div>
-  </section>
 
   <!-- ── WIRE DIVIDER ─────────────────────────────────────────── -->
   <div class="wire-divider" aria-hidden="true">
@@ -141,8 +99,8 @@ const talks = [
       <div class="container">
         <div class="section-header">
           <span class="section-label">Writing</span>
-          <h2>Thinking out loud.</h2>
-          <p>Notes on agentic engineering, AI in production and the practice of technology leadership.</p>
+          <h2>Writing.</h2>
+          <p>Notes from building AI in production - not theory, not hype.</p>
         </div>
         <div class="posts-grid">
           {posts.map(post => (
@@ -180,7 +138,7 @@ const talks = [
         <span class="section-label">Speaking & podcasts</span>
         <h2>Let's talk about what AI actually changes.</h2>
         <p>
-          I write and speak about what AI means for the people building software — the craft,
+          I write and speak about what AI means for the people building software - the craft,
           the architecture, the governance and the risks most adoption skips. Plain,
           practitioner, no hype. Based in Australia; happy to do remote podcasts and talks
           anywhere, in-person around Melbourne.
@@ -254,22 +212,12 @@ const talks = [
     </section>
   )}
 
-  <!-- ── WAYS TO WORK TOGETHER ─────────────────────────────── -->
-  <section class="section" id="services">
+  <!-- ── ADVISORY ───────────────────────────────────────────── -->
+  <section class="section advisory-section" id="services">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">Ways to work together</span>
-        <h2>Advisory and engagement.</h2>
-        <p>When you need someone who has shipped real systems under real constraints — strategy, architecture, delivery, or a conversation about where to go next.</p>
-      </div>
-      <div class="services-grid">
-        {services.map(s => (
-          <div class="service-card">
-            <div class="service-icon" set:html={s.icon} />
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
-          </div>
-        ))}
+      <div class="advisory-inner">
+        <span class="section-label">Advisory</span>
+        <p class="advisory-text">I take on the occasional advisory engagement - usually agentic engineering strategy, AI governance or getting AI systems from proof-of-concept to production. If that is useful to you, <a href="#contact" class="advisory-link">get in touch</a>.</p>
       </div>
     </div>
   </section>
@@ -284,12 +232,12 @@ const talks = [
         </div>
         <p>
           I've spent 15+ years building software across financial services, energy, government,
-          eCommerce and health — for organisations including Westpac, Lloyds Banking Group and
+          eCommerce and health, for organisations including Westpac, Lloyds Banking Group and
           Shell Energy. I write the Prompt to Prod newsletter and speak about what AI is doing
           to the craft of software.
         </p>
         <p>
-          My current focus is agentic engineering and AI governance — the discipline of taking
+          My current focus is agentic engineering and AI governance - the discipline of taking
           AI from a compelling demo to a system that runs reliably in production, and the
           organisational and ethical side of getting that right.
         </p>
@@ -313,12 +261,12 @@ const talks = [
       </div>
       <div class="about-avatar">
         <div class="about-card sidebar-card">
-          <h3>Engagements</h3>
+          <h3>Currently</h3>
           <ul>
-            <li>Agentic engineering and AI systems</li>
-            <li>Engineering hiring and team design</li>
-            <li>Cloud architecture and DevSecOps</li>
-            <li>Strategy and advisory</li>
+            <li>Writing Prompt to Prod weekly</li>
+            <li>Speaking on agentic engineering and AI governance</li>
+            <li>Building agent systems that ship to production</li>
+            <li>Based in Melbourne, working globally</li>
           </ul>
         </div>
       </div>
@@ -346,7 +294,7 @@ const talks = [
           </div>
 
           <div class="form-field">
-            <label for="cf-email" class="form-label">Work email <span class="form-required" aria-hidden="true">*</span></label>
+            <label for="cf-email" class="form-label">Email <span class="form-required" aria-hidden="true">*</span></label>
             <input type="email" id="cf-email" name="email" required class="form-input" autocomplete="email">
           </div>
 
@@ -363,6 +311,7 @@ const talks = [
               <option value="Speaking engagement">Speaking engagement</option>
               <option value="Guest piece">Guest piece</option>
               <option value="Advisory">Advisory</option>
+              <option value="Other">Other / General enquiry</option>
             </select>
           </div>
 
@@ -377,9 +326,10 @@ const talks = [
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="btn">Send</button>
+            <button type="submit" class="btn">Send enquiry</button>
             <p id="form-error" class="form-error-msg" aria-live="polite"></p>
           </div>
+          <p class="form-note">You'll get a reply within one business day.</p>
         </form>
 
         <p class="contact-fallback">
@@ -391,12 +341,12 @@ const talks = [
       </div>
 
       <div class="contact-card sidebar-card">
-        <h3>What to include</h3>
+        <h3>Good to know</h3>
         <ul>
-          <li>Whether you're inviting me to speak, appear on a podcast, or commission a guest piece</li>
-          <li>What you're building or writing about and what perspective you're after</li>
-          <li>The scale and timeline you're working to</li>
-          <li>Whether you need advisory, a guest piece, or something longer</li>
+          <li>Most enquiries get a reply same day</li>
+          <li>Remote podcasts and talks work well - based in Melbourne</li>
+          <li>For advisory, typical engagements are 4 - 6 weeks with a written output</li>
+          <li>No intake forms, no sales calls - just a conversation</li>
         </ul>
       </div>
     </div>
@@ -412,21 +362,6 @@ if (wire) {
   }, { threshold: 0.5 })
   wo.observe(wire)
 }
-
-/* ── SCROLL-REVEAL: service cards ───────────────────────── */
-const reveal = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view')
-      reveal.unobserve(entry.target)
-    }
-  })
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
-
-document.querySelectorAll('.service-card').forEach((el, i) => {
-  ;(el as HTMLElement).style.transitionDelay = `${i * 0.08}s`
-  reveal.observe(el)
-})
 
 /* ── CONTACT FORM (Formspree AJAX) ──────────────────────── */
 const form = document.getElementById('contact-form')
@@ -446,13 +381,15 @@ if (form) {
         form.innerHTML = '<div class="form-success"><p>Thanks - I\'ll be in touch within one business day.</p></div>'
       } else {
         btn.disabled = false
-        btn.textContent = 'Send'
+        btn.textContent = 'Send enquiry'
         const errEl = document.getElementById('form-error')
         if (errEl) errEl.textContent = 'Something went wrong. Please try emailing directly.'
       }
     } catch {
       btn.disabled = false
-      btn.textContent = 'Send'
+      btn.textContent = 'Send enquiry'
+      const errEl = document.getElementById('form-error')
+      if (errEl) errEl.textContent = 'Could not reach the server. Please try emailing directly.'
     }
   })
 }
@@ -474,7 +411,6 @@ if (form) {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    max-width: 760px;
   }
 
   .hero-title {
@@ -501,6 +437,8 @@ if (form) {
     transition: text-decoration-color 0.15s;
   }
   .hero-inline-link:hover { text-decoration-color: var(--accent); }
+  .hero-sub-link { color: var(--accent); font-size: 0.9rem; text-decoration: underline; text-decoration-color: rgba(91,106,208,0.35); text-underline-offset: 2px; transition: text-decoration-color 0.15s; }
+  .hero-sub-link:hover { text-decoration-color: var(--accent); }
 
   /* Wire divider */
   .wire-divider {
@@ -582,60 +520,12 @@ if (form) {
     max-width: 52ch;
   }
 
-  /* Services */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-    gap: 1.125rem;
-  }
-
-  .service-card {
-    background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(228,228,231,0.6);
-    border-radius: var(--radius);
-    padding: 1.625rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.5s;
-    opacity: 0;
-    transform: translateY(28px);
-  }
-
-  .service-card.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .service-card.in-view:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-accent);
-    transform: translateY(-2px);
-  }
-
-  .service-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--accent-light);
-    border-radius: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent);
-    flex-shrink: 0;
-    margin-bottom: 0.25rem;
-  }
-
-  .service-card h3 { font-size: 1rem; font-weight: 600; }
-
-  .service-card p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    max-width: none;
-  }
+  /* Advisory */
+  .advisory-section { padding: 2.5rem 0; }
+  .advisory-inner { display: flex; flex-direction: column; gap: 0.75rem; max-width: 640px; }
+  .advisory-text { font-size: 1.0625rem; color: var(--muted); line-height: 1.7; }
+  .advisory-link { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(91,106,208,0.35); }
+  .advisory-link:hover { text-decoration-color: var(--accent); }
 
   /* About */
   .about-inner {
@@ -1035,6 +925,8 @@ if (form) {
     margin: 0;
     max-width: none;
   }
+
+  .form-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.375rem; }
 
   .form-success {
     padding: 1.25rem 1.5rem;

@@ -2,7 +2,7 @@
 import '../styles/global.css'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
-import { SITE_URL, AUTHOR, SOCIAL } from '../config/site'
+import { SITE_URL, SOCIAL } from '../config/site'
 
 interface Props {
   title: string
@@ -62,8 +62,8 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- JSON-LD: Person + WebSite (article pages add BlogPosting inline) -->
-    {type !== 'article' && (
+    <!-- JSON-LD: Person + WebSite (home page only; article pages add BlogPosting inline) -->
+    {new URL(canonicalUrl).pathname === '/' && (
       <>
         <script type="application/ld+json" set:html={JSON.stringify({
           '@context': 'https://schema.org',
@@ -98,11 +98,12 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3C0BDFJ691"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);} // eslint-disable-line prefer-rest-params
       gtag('js', new Date());
       gtag('config', 'G-3C0BDFJ691');
     </script>
     <script is:inline>
+      /* eslint-disable no-var */
       document.addEventListener('DOMContentLoaded', function() {
         var ctaMap = {
           'Invite me on your podcast': 'podcast',

@@ -40,7 +40,7 @@ export async function getStaticPaths() {
       title: 'Comprehension Debt',
       h1: 'Comprehension debt.',
       intro: "My term for a structural risk that AI adoption is accelerating: the growing gap between the rate at which code is produced and the rate at which the team can understand, verify and maintain it. When AI writes faster than humans can read, the organisation accumulates comprehension debt. This is the risk no one is pricing in — and it compounds.",
-      matchTags: ['comprehension debt', 'technical debt'],
+      matchTags: ['comprehension debt', 'technical debt', 'autonomous agents', 'AI transparency', 'organisational risk'],
     },
   ]
   return hubs.map(hub => {
@@ -76,6 +76,7 @@ const canonicalUrl = `${SITE_URL}/topics/${hub.slug}/`
         </div>
       </header>
 
+      {posts.length > 0 && <h2 class="topic-posts-heading">Related writing</h2>}
       {posts.length > 0 ? (
         <div class="posts-grid">
           {posts.map(post => (
@@ -149,5 +150,15 @@ const canonicalUrl = `${SITE_URL}/topics/${hub.slug}/`
     color: var(--muted);
     font-size: 1rem;
     padding: 2rem 0;
+  }
+
+  .topic-posts-heading {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+    font-family: 'Space Grotesk', sans-serif;
   }
 </style>
