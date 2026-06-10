@@ -23,7 +23,7 @@ const {
 } = Astro.props
 
 const siteName = 'Itinerate Consulting'
-const fullTitle = title === siteName ? title : `${title} - ${siteName}`
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`
 const ogImageUrl = new URL(ogImage, Astro.site)
 ---
 
@@ -120,7 +120,7 @@ const ogImageUrl = new URL(ogImage, Astro.site)
           if (ctaKey) {
             gtag('event', 'cta_click', { cta_type: ctaMap[ctaKey] });
           }
-          if (href && href.indexOf('itinerateconsulting.com') === -1 && href.indexOf('#') !== 0 && href.indexOf('mailto:') !== 0) {
+          if (href && link.hostname !== location.hostname && href.indexOf('#') !== 0 && href.indexOf('mailto:') !== 0) {
             gtag('event', 'outbound_click', { destination: href, link_text: text });
           }
         });

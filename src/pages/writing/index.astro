@@ -18,6 +18,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort()
         <div class="writing-header-text">
           <span class="section-label">Writing</span>
           <h1>Thinking out loud.</h1>
+          <h2 class="writing-subhead">All posts</h2>
         </div>
         <div class="writing-platforms">
           <a href="https://substack.com/@prompttoprod" target="_blank" rel="noopener noreferrer" class="platform-link">
@@ -74,6 +75,15 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort()
   .writing-header h1 {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     margin-top: 0.25rem;
+  }
+
+  .writing-subhead {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-top: 0.25rem;
+    font-family: 'Space Grotesk', sans-serif;
   }
 
   .writing-platforms {

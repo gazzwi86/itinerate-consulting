@@ -4,44 +4,6 @@ import { getSortedPosts, postSlug } from '../../lib/posts'
 import PostCard from '../../components/PostCard.astro'
 import { SITE_URL } from '../../config/site'
 
-const hubs = [
-  {
-    slug: 'agentic-engineering',
-    title: 'Agentic Engineering',
-    h1: 'Agentic engineering.',
-    intro: "The shift from writing code to designing systems that write code. Agentic engineering is about building the harnesses, evaluation frameworks and orchestration layers that let AI agents work reliably in production — not just in demos. This is where the real craft is moving.",
-    matchTags: ['agentic engineering', 'AI agents', 'specification-driven', 'enterprise AI', 'software development'],
-  },
-  {
-    slug: 'ai-native-architecture',
-    title: 'AI-Native Architecture & Ontologies',
-    h1: 'AI-native architecture.',
-    intro: "AI agents stall without a model of the business they operate in. Ontologies — formal representations of your domain, entities and relationships — are becoming the missing layer in AI architectures. This pillar covers how to build AI systems that reason about your business, not just your data. Ontologies are a particular focus: a rising area where practitioners can build durable advantage.",
-    matchTags: ['ontolog', 'AI agents', 'context engine', 'perceptrons', 'neural networks', 'knowledge management', 'information architecture'],
-  },
-  {
-    slug: 'ai-governance',
-    title: 'AI Governance & Risk',
-    h1: 'AI governance and risk.',
-    intro: "The parts of AI adoption that most teams skip until something goes wrong. Non-human identity, agent security, the ethics of AI decision-making and the organisational side of responsible deployment. If you are shipping AI into production, governance is not optional — it is what separates a system that scales from one that creates liability.",
-    matchTags: ['governance', 'AI safety', 'responsible AI', 'security', 'identity', 'ethics', 'trust'],
-  },
-  {
-    slug: 'engineering-craft',
-    title: 'Engineering Leadership & Craft',
-    h1: 'Engineering leadership and craft.',
-    intro: "What it takes to build well — specifications, processes, peer review, team design and the discipline of shipping. AI is changing every part of this, but the fundamentals of good engineering practice compound over time. This pillar covers the craft of software engineering in an era when the tools are changing faster than the principles.",
-    matchTags: ['specification', 'development', 'craft', 'leadership', 'code review', 'SDLC', 'skills', 'prompts', 'atomic', 'composable', 'prototype'],
-  },
-  {
-    slug: 'comprehension-debt',
-    title: 'Comprehension Debt',
-    h1: 'Comprehension debt.',
-    intro: "My term for a structural risk that AI adoption is accelerating: the growing gap between the rate at which code is produced and the rate at which the team can understand, verify and maintain it. When AI writes faster than humans can read, the organisation accumulates comprehension debt. This is the risk no one is pricing in — and it compounds.",
-    matchTags: ['comprehension debt', 'comprehension', 'risk', 'technical debt'],
-  },
-]
-
 export async function getStaticPaths() {
   const allPosts = await getSortedPosts()
   const hubs = [
@@ -78,7 +40,7 @@ export async function getStaticPaths() {
       title: 'Comprehension Debt',
       h1: 'Comprehension debt.',
       intro: "My term for a structural risk that AI adoption is accelerating: the growing gap between the rate at which code is produced and the rate at which the team can understand, verify and maintain it. When AI writes faster than humans can read, the organisation accumulates comprehension debt. This is the risk no one is pricing in — and it compounds.",
-      matchTags: ['comprehension debt', 'comprehension', 'risk', 'technical debt'],
+      matchTags: ['comprehension debt', 'technical debt'],
     },
   ]
   return hubs.map(hub => {
@@ -103,7 +65,7 @@ const canonicalUrl = `${SITE_URL}/topics/${hub.slug}/`
   <div class="topic-page">
     <div class="container">
       <header class="topic-header">
-        <a href="/#writing" class="back-link">
+        <a href="/writing" class="back-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
           All writing
         </a>

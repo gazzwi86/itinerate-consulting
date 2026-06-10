@@ -29,6 +29,10 @@ const services = [
   },
 ]
 
+const testimonials = [
+  // { quote: '...', author: 'Name', role: 'Title, Company' },
+]
+
 const talks = [
   {
     title: 'Comprehension debt',
@@ -77,7 +81,7 @@ const talks = [
         Plain, practitioner, no hype.
       </p>
       <div class="hero-actions fade-up fade-up-3">
-        <a href="#writing" class="btn">Read the writing →</a>
+        <a href="#writing" class="btn">Read the writing <span aria-hidden="true">→</span></a>
         <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Subscribe</a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
@@ -97,6 +101,24 @@ const talks = [
       <span class="proof-label">Based in Australia. Working globally.</span>
     </div>
   </div>
+
+  <!-- ── NEWSLETTER (after proof belt) ─────────────────────────── -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-embed">
+        <p class="section-label newsletter-label">Get Prompt to Prod in your inbox</p>
+        <form class="newsletter-form" action="https://prompttoprod.substack.com/api/v1/free" method="post" target="_blank">
+          <input type="hidden" name="first_url" value="https://itinerateconsulting.com">
+          <input type="hidden" name="first_referrer" value="">
+          <div class="newsletter-row">
+            <input type="email" name="email" placeholder="your@email.com" required class="newsletter-input" aria-label="Email address">
+            <button type="submit" class="btn newsletter-btn">Subscribe</button>
+          </div>
+          <p class="newsletter-fine">Free newsletter. Unsubscribe any time.</p>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <!-- ── WIRE DIVIDER ─────────────────────────────────────────── -->
   <div class="wire-divider" aria-hidden="true">
@@ -135,6 +157,18 @@ const talks = [
             />
           ))}
         </div>
+        <div class="newsletter-embed newsletter-embed--writing">
+          <p class="section-label newsletter-label">Get Prompt to Prod in your inbox</p>
+          <form class="newsletter-form" action="https://prompttoprod.substack.com/api/v1/free" method="post" target="_blank">
+            <input type="hidden" name="first_url" value="https://itinerateconsulting.com">
+            <input type="hidden" name="first_referrer" value="">
+            <div class="newsletter-row">
+              <input type="email" name="email" placeholder="your@email.com" required class="newsletter-input" aria-label="Email address">
+              <button type="submit" class="btn newsletter-btn">Subscribe</button>
+            </div>
+            <p class="newsletter-fine">Free newsletter. Unsubscribe any time.</p>
+          </form>
+        </div>
       </div>
     </section>
   )}
@@ -155,15 +189,15 @@ const talks = [
 
       <div class="talks-grid">
         {talks.map(t => (
-          <div class="talk-card">
+          <a href={t.href} class="talk-card">
             <h3>{t.title}</h3>
             <p>{t.desc}</p>
-          </div>
+          </a>
         ))}
       </div>
 
       <div class="speaking-ctas">
-        <a href="#contact" class="btn">Invite me on your podcast →</a>
+        <a href="#contact" class="btn">Invite me on your podcast <span aria-hidden="true">→</span></a>
         <a href="#contact" class="btn btn-ghost">Book me to speak</a>
         <a href="#contact" class="btn btn-ghost">Commission a guest piece</a>
       </div>
@@ -179,6 +213,46 @@ const talks = [
       </div>
     </div>
   </section>
+
+  <!-- ── LOGOS BELT ───────────────────────────────────────── -->
+  <div class="logos-belt">
+    <div class="container">
+      <span class="logos-label">Experience across</span>
+      <div class="logos-row">
+        <span class="logo-chip">Burberry</span>
+        <span class="logo-chip">Westpac</span>
+        <span class="logo-chip">Lloyds Banking Group</span>
+        <span class="logo-chip">Shell Energy</span>
+        <span class="logo-chip">Vic. Dept of Transport</span>
+        <span class="logo-chip">Colonial First State</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TESTIMONIALS ──────────────────────────────────────── -->
+  {testimonials.length > 0 && (
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">What people say</span>
+          <h2>Kind words.</h2>
+        </div>
+        <div class="testimonials-grid">
+          {testimonials.map(t => (
+            <figure class="testimonial-card sidebar-card">
+              <blockquote>
+                <p>"{t.quote}"</p>
+              </blockquote>
+              <figcaption>
+                <strong>{t.author}</strong>
+                <span>{t.role}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ── WAYS TO WORK TOGETHER ─────────────────────────────── -->
   <section class="section" id="services">
@@ -263,20 +337,57 @@ const talks = [
         </p>
         <p>I typically respond within one business day.</p>
 
-        <div class="contact-details">
-          <div class="contact-item">
-            <span class="contact-label">Email</span>
-            <a href="#" class="contact-link" data-u={CONTACT_EMAIL.u} data-d={CONTACT_EMAIL.d}>
-              {CONTACT_EMAIL.u} [at] {CONTACT_EMAIL.d}
-            </a>
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/REPLACE_ME" method="POST">
+          <input type="text" name="_gotcha" tabindex="-1" aria-hidden="true" style="display:none">
+
+          <div class="form-field">
+            <label for="cf-name" class="form-label">Name <span class="form-required" aria-hidden="true">*</span></label>
+            <input type="text" id="cf-name" name="name" required class="form-input" autocomplete="name">
           </div>
-          <div class="contact-item">
-            <span class="contact-label">LinkedIn</span>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" class="contact-link">
-              gareth-williams-solutions-consultant →
-            </a>
+
+          <div class="form-field">
+            <label for="cf-email" class="form-label">Work email <span class="form-required" aria-hidden="true">*</span></label>
+            <input type="email" id="cf-email" name="email" required class="form-input" autocomplete="email">
           </div>
-        </div>
+
+          <div class="form-field">
+            <label for="cf-org" class="form-label">Organisation</label>
+            <input type="text" id="cf-org" name="organisation" class="form-input" autocomplete="organization">
+          </div>
+
+          <div class="form-field">
+            <label for="cf-type" class="form-label">Enquiry type <span class="form-required" aria-hidden="true">*</span></label>
+            <select id="cf-type" name="enquiry_type" required class="form-input form-select">
+              <option value="" disabled selected>Select...</option>
+              <option value="Podcast appearance">Podcast appearance</option>
+              <option value="Speaking engagement">Speaking engagement</option>
+              <option value="Guest piece">Guest piece</option>
+              <option value="Advisory">Advisory</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="cf-message" class="form-label">What you're working on <span class="form-required" aria-hidden="true">*</span></label>
+            <textarea id="cf-message" name="message" required rows="4" class="form-input form-textarea" placeholder="Tell me what you're building or working on..."></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="cf-timeline" class="form-label">Timeline</label>
+            <input type="text" id="cf-timeline" name="timeline" class="form-input" placeholder="e.g. next month, Q3, open">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn">Send</button>
+            <p id="form-error" class="form-error-msg" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <p class="contact-fallback">
+          Or email directly:
+          <a href="#" class="contact-link" data-u={CONTACT_EMAIL.u} data-d={CONTACT_EMAIL.d}>
+            {CONTACT_EMAIL.u} [at] {CONTACT_EMAIL.d}
+          </a>
+        </p>
       </div>
 
       <div class="contact-card sidebar-card">
@@ -316,6 +427,35 @@ document.querySelectorAll('.service-card').forEach((el, i) => {
   ;(el as HTMLElement).style.transitionDelay = `${i * 0.08}s`
   reveal.observe(el)
 })
+
+/* ── CONTACT FORM (Formspree AJAX) ──────────────────────── */
+const form = document.getElementById('contact-form')
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
+    btn.disabled = true
+    btn.textContent = 'Sending...'
+    try {
+      const res = await fetch((form as HTMLFormElement).action, {
+        method: 'POST',
+        body: new FormData(form as HTMLFormElement),
+        headers: { Accept: 'application/json' },
+      })
+      if (res.ok) {
+        form.innerHTML = '<div class="form-success"><p>Thanks - I\'ll be in touch within one business day.</p></div>'
+      } else {
+        btn.disabled = false
+        btn.textContent = 'Send'
+        const errEl = document.getElementById('form-error')
+        if (errEl) errEl.textContent = 'Something went wrong. Please try emailing directly.'
+      }
+    } catch {
+      btn.disabled = false
+      btn.textContent = 'Send'
+    }
+  })
+}
 </script>
 
 </Base>
@@ -655,6 +795,14 @@ document.querySelectorAll('.service-card').forEach((el, i) => {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    transition: border-color 0.18s, box-shadow 0.18s, transform 0.15s;
+    text-decoration: none;
+  }
+
+  .talk-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(91,106,208,0.1);
+    transform: translateY(-2px);
   }
 
   .talk-card h3 {
@@ -713,5 +861,237 @@ document.querySelectorAll('.service-card').forEach((el, i) => {
     .contact-card { position: static; }
     .speaking-ctas { flex-direction: column; }
     .speaking-ctas .btn { text-align: center; justify-content: center; }
+  }
+
+  /* Logos belt */
+  .logos-belt {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .logos-belt .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+
+  .logos-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .logos-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .logo-chip {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #9ca3af;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.6);
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  /* Newsletter embed */
+  .newsletter-section {
+    padding: 2.5rem 0;
+  }
+
+  .newsletter-embed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .newsletter-embed--writing {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .newsletter-label {
+    margin: 0;
+  }
+
+  .newsletter-row {
+    display: flex;
+    gap: 0.625rem;
+    max-width: 480px;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    background: rgba(255,255,255,0.85);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .newsletter-input:focus {
+    border-color: var(--accent);
+  }
+
+  .newsletter-btn {
+    white-space: nowrap;
+  }
+
+  .newsletter-fine {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+    max-width: none;
+  }
+
+  /* Contact form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    margin-top: 0.5rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .form-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .form-required {
+    color: var(--accent);
+  }
+
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    background: rgba(255,255,255,0.85);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    border-color: var(--accent);
+  }
+
+  .form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .form-error-msg {
+    font-size: 0.875rem;
+    color: #dc2626;
+    margin: 0;
+    max-width: none;
+  }
+
+  .form-success {
+    padding: 1.25rem 1.5rem;
+    background: var(--mint-light);
+    border-left: 3px solid var(--mint);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .form-success p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.9375rem;
+    max-width: none;
+  }
+
+  .contact-fallback {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    max-width: none;
+  }
+
+  .contact-fallback .contact-link {
+    font-size: 0.875rem;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+  }
+
+  .testimonial-card blockquote p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-card figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .testimonial-card figcaption strong {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .testimonial-card figcaption span {
+    font-size: 0.8rem;
+    color: var(--muted);
   }
 </style>

@@ -12,6 +12,10 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props
 const { title, date, summary, canonicalUrl: externalUrl, platform, tags } = post.data
+const isOwnPlatform = externalUrl.includes('substack.com') || externalUrl.includes('medium.com')
+const readUrl = isOwnPlatform
+  ? `${externalUrl}${externalUrl.includes('?') ? '&' : '?'}utm_source=itinerate&utm_medium=referral&utm_campaign=writing-detail`
+  : externalUrl
 const formatted = formatDate(date)
 // The page's own URL is canonical — the external URL is the "read on platform" destination
 const selfUrl = new URL(`/writing/${postSlug(post.id)}`, Astro.site).href
@@ -69,12 +73,12 @@ const selfUrl = new URL(`/writing/${postSlug(post.id)}`, Astro.site).href
       <div class="post-cta">
         <p>This piece is published on {platform}. Read the full article there.</p>
         <a
-          href={externalUrl}
+          href={readUrl}
           target="_blank"
           rel="noopener noreferrer"
           class="btn"
         >
-          Read the full piece on {platform} →
+          Read the full piece on {platform} <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>

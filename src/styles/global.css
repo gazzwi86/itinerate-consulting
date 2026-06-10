@@ -130,6 +130,12 @@ a {
   text-decoration: none;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 img, svg { display: block; }
 
 main { flex: 1; }
