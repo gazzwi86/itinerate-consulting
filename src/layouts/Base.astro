@@ -98,26 +98,25 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3C0BDFJ691"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);} // eslint-disable-line prefer-rest-params
+      function gtag(...args){ window.dataLayer.push(args); }
       gtag('js', new Date());
       gtag('config', 'G-3C0BDFJ691');
     </script>
     <script is:inline>
-      /* eslint-disable no-var */
-      document.addEventListener('DOMContentLoaded', function() {
-        var ctaMap = {
+      document.addEventListener('DOMContentLoaded', () => {
+        const ctaMap = {
           'Invite me on your podcast': 'podcast',
           'Book me to speak': 'speaking',
           'Commission a guest piece': 'guest_piece',
           'Subscribe': 'subscribe',
           'Read the writing': 'read_writing',
         };
-        document.body.addEventListener('click', function(e) {
-          var link = e.target.closest('a[href]');
+        document.body.addEventListener('click', (e) => {
+          const link = e.target.closest('a[href]');
           if (!link) return;
-          var href = link.href || '';
-          var text = (link.textContent || '').trim().replace(/\s+/g, ' ').substring(0, 80);
-          var ctaKey = Object.keys(ctaMap).find(function(k) { return text.startsWith(k); });
+          const href = link.href || '';
+          const text = (link.textContent || '').trim().replace(/\s+/g, ' ').substring(0, 80);
+          const ctaKey = Object.keys(ctaMap).find((k) => text.startsWith(k));
           if (ctaKey) {
             gtag('event', 'cta_click', { cta_type: ctaMap[ctaKey] });
           }
