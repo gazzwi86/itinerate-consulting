@@ -4,7 +4,7 @@ import { getSortedPosts, postSlug } from '../lib/posts'
 import PostCard from '../components/PostCard.astro'
 import { SOCIAL, CONTACT_EMAIL } from '../config/site'
 
-const posts = (await getSortedPosts()).slice(0, 3)
+const posts = await getSortedPosts()
 
 const services = [
   {
@@ -15,7 +15,7 @@ const services = [
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
     title: 'Engineering leadership',
-    desc: 'Interim and fractional CTO. Scaling teams, establishing engineering practices and driving delivery when it matters most.',
+    desc: 'Scaling teams, establishing engineering practices and driving delivery when it matters most.',
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
@@ -24,8 +24,36 @@ const services = [
   },
   {
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-    title: 'Strategy and architecture',
+    title: 'Strategy and advisory',
     desc: 'AI readiness assessments, cloud architecture and DevSecOps for organisations modernising at pace. Practical, not theoretical.',
+  },
+]
+
+const talks = [
+  {
+    title: 'Comprehension debt',
+    desc: 'When AI writes faster than your team can understand — the structural risk no one is pricing in.',
+    href: '/topics/comprehension-debt',
+  },
+  {
+    title: 'Your AI has your keys',
+    desc: 'The employee-clone problem — non-human identity and why AI agents need their own security model.',
+    href: '/topics/ai-governance',
+  },
+  {
+    title: 'Ontologies for agents',
+    desc: 'Why your AI stalls without a model of your business — and how to build one.',
+    href: '/topics/ai-native-architecture',
+  },
+  {
+    title: 'Agentic engineering',
+    desc: 'The craft nobody is teaching yet — what changes when you design the system that writes the code.',
+    href: '/topics/agentic-engineering',
+  },
+  {
+    title: 'Prototype-driven development',
+    desc: 'An SDLC for the AI age — the best spec is a tested prototype, not a document.',
+    href: '/topics/engineering-craft',
   },
 ]
 ---
@@ -38,45 +66,127 @@ const services = [
   <!-- ── HERO ────────────────────────────────────────────────── -->
   <section class="hero" id="home">
     <div class="container hero-inner">
-      <div class="hero-badge fade-up fade-up-1">
-        <span class="tag">Available for new engagements</span>
-      </div>
-      <h1 class="hero-title fade-up fade-up-2">
-        I help engineering teams<br />build and ship with AI.
+      <h1 class="hero-title fade-up fade-up-1">
+        I build with AI.<br />I write about what that actually changes.
       </h1>
-      <p class="hero-sub fade-up fade-up-3">
-        Gareth Williams. Independent consultant specialising in agentic engineering,
-        AI-native architecture and the organisational side of getting AI into production.
+      <p class="hero-sub fade-up fade-up-2">
+        Gareth Williams. Principal Solutions Architect and the writer behind
+        <a href={SOCIAL.newsletter} target="_blank" rel="noopener noreferrer" class="hero-inline-link">Prompt to Prod</a>.
+        15+ years building software across banking, energy, government and retail —
+        now focused on agentic engineering, AI governance and what it takes to ship AI in production.
+        Plain, practitioner, no hype.
       </p>
-      <div class="hero-actions fade-up fade-up-4">
-        <a href="#contact" class="btn">Get in touch →</a>
-        <a href="#services" class="btn btn-ghost">What I do</a>
+      <div class="hero-actions fade-up fade-up-3">
+        <a href="#writing" class="btn">Read the writing →</a>
+        <a href={SOCIAL.newsletter} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Subscribe</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
     </div>
-    <div class="hero-glow" aria-hidden="true"></div>
   </section>
 
   <!-- ── PROOF BELT ─────────────────────────────────────────── -->
   <div class="proof-belt">
     <div class="container proof-inner">
       <span class="proof-label">Writing on</span>
-      <a href="https://substack.com/@prompttoprod" target="_blank" rel="noopener noreferrer" class="proof-link">Substack · Prompt to Prod</a>
+      <a href={SOCIAL.newsletter} target="_blank" rel="noopener noreferrer" class="proof-link">Substack · Prompt to Prod</a>
       <span class="proof-sep" aria-hidden="true">·</span>
       <a href={SOCIAL.medium} target="_blank" rel="noopener noreferrer" class="proof-link">Medium</a>
       <span class="proof-sep" aria-hidden="true">·</span>
-      <a href="https://www.linkedin.com/in/gareth-williams-solutions-consultant/" target="_blank" rel="noopener noreferrer" class="proof-link">LinkedIn</a>
+      <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" class="proof-link">LinkedIn</a>
       <span class="proof-sep proof-sep--wide" aria-hidden="true">·</span>
       <span class="proof-label">Based in Australia. Working globally.</span>
     </div>
   </div>
 
-  <!-- ── SERVICES ───────────────────────────────────────────── -->
+  <!-- ── WIRE DIVIDER ─────────────────────────────────────────── -->
+  <div class="wire-divider" aria-hidden="true">
+    <svg viewBox="0 0 1100 2" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="1" x2="1100" y2="1" stroke="url(#wire-grad)" stroke-width="1.5" class="wire-line"/>
+      <defs>
+        <linearGradient id="wire-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="transparent"/>
+          <stop offset="30%" stop-color="#5B6AD0" stop-opacity="0.6"/>
+          <stop offset="70%" stop-color="#6BCFBA" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- ── WRITING ────────────────────────────────────────────── -->
+  {posts.length > 0 && (
+    <section class="section" id="writing">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Writing</span>
+          <h2>Thinking out loud.</h2>
+          <p>Notes on agentic engineering, AI in production and the practice of technology leadership.</p>
+        </div>
+        <div class="posts-grid">
+          {posts.map(post => (
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              summary={post.data.summary}
+              canonicalUrl={post.data.canonicalUrl}
+              platform={post.data.platform}
+              tags={post.data.tags}
+              slug={postSlug(post.id)}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── SPEAKING ────────────────────────────────────────────── -->
+  <section class="section section--surface" id="speaking">
+    <div class="container">
+      <div class="section-header section-header--wide">
+        <span class="section-label">Speaking & podcasts</span>
+        <h2>Let's talk about what AI actually changes.</h2>
+        <p>
+          I write and speak about what AI means for the people building software — the craft,
+          the architecture, the governance and the risks most adoption skips. Plain,
+          practitioner, no hype. Based in Australia; happy to do remote podcasts and talks
+          anywhere, in-person around Melbourne.
+        </p>
+      </div>
+
+      <div class="talks-grid">
+        {talks.map(t => (
+          <div class="talk-card">
+            <h3>{t.title}</h3>
+            <p>{t.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="speaking-ctas">
+        <a href="#contact" class="btn">Invite me on your podcast →</a>
+        <a href="#contact" class="btn btn-ghost">Book me to speak</a>
+        <a href="#contact" class="btn btn-ghost">Commission a guest piece</a>
+      </div>
+
+      <div class="speaking-bio">
+        <p class="bio-label">Copy-paste bio (50 words)</p>
+        <blockquote class="bio-block">
+          Gareth Williams is a Principal Solutions Architect and the writer behind Prompt to Prod.
+          He has spent 15+ years building software across banking, energy, government and retail,
+          and now focuses on agentic engineering and AI governance. He writes and speaks about what
+          AI actually changes for engineering teams, not the hype.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WAYS TO WORK TOGETHER ─────────────────────────────── -->
   <section class="section" id="services">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">What I do</span>
-        <h2>How I can help</h2>
-        <p>I work with engineering teams and leadership across the full arc - from strategy to shipping.</p>
+        <span class="section-label">Ways to work together</span>
+        <h2>Advisory and engagement.</h2>
+        <p>When you need someone who has shipped real systems under real constraints — strategy, architecture, delivery, or a conversation about where to go next.</p>
       </div>
       <div class="services-grid">
         {services.map(s => (
@@ -99,28 +209,27 @@ const services = [
           <h2>Gareth Williams.</h2>
         </div>
         <p>
-          I built Itinerate Consulting on a simple premise: the best technology decisions
-          come from people who have shipped real systems under real constraints. I work
-          across strategy, architecture, delivery and leadership - often all at once.
+          I've spent 15+ years building software across financial services, energy, government,
+          eCommerce and health — for organisations including Westpac, Lloyds Banking Group and
+          Shell Energy. I write the Prompt to Prod newsletter and speak about what AI is doing
+          to the craft of software.
         </p>
         <p>
-          My focus right now is agentic engineering - the discipline of taking AI from a
-          compelling demo to a system that runs reliably in production. That means evaluation
-          frameworks, agent orchestration, human-in-the-loop design and the organisational
-          changes that make it stick.
+          My current focus is agentic engineering and AI governance — the discipline of taking
+          AI from a compelling demo to a system that runs reliably in production, and the
+          organisational and ethical side of getting that right.
         </p>
         <p>
-          I'm based in Australia and work with clients globally. Engagements range from
-          short advisory stints to longer embedded partnerships.
+          Based in Australia. Working globally.
         </p>
         <div class="about-links">
-          <a href="https://www.linkedin.com/in/gareth-williams-solutions-consultant/" target="_blank" rel="noopener noreferrer" class="about-social-link">
+          <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" class="about-social-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
           </a>
-          <a href="https://substack.com/@prompttoprod" target="_blank" rel="noopener noreferrer" class="about-social-link">
+          <a href={SOCIAL.newsletter} target="_blank" rel="noopener noreferrer" class="about-social-link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08zM1.46 10.812V24L12 18.11 22.54 24V10.812zM22.54 0H1.46v2.836h21.08z"/></svg>
-            Substack
+            Prompt to Prod
           </a>
           <a href={SOCIAL.medium} target="_blank" rel="noopener noreferrer" class="about-social-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
@@ -129,48 +238,18 @@ const services = [
         </div>
       </div>
       <div class="about-avatar">
-        <div class="avatar-initials" aria-hidden="true">GW</div>
-        <div class="about-card">
+        <div class="about-card sidebar-card">
           <h3>Engagements</h3>
           <ul>
             <li>Agentic engineering and AI systems</li>
-            <li>Interim and fractional CTO</li>
             <li>Engineering hiring and team design</li>
             <li>Cloud architecture and DevSecOps</li>
+            <li>Strategy and advisory</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ── WRITING ────────────────────────────────────────────── -->
-  {posts.length > 0 && (
-    <section class="section" id="writing">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">Writing</span>
-          <h2>Latest thinking.</h2>
-          <p>Notes on agentic engineering, AI in production and the practice of technology leadership.</p>
-        </div>
-        <div class="posts-grid">
-          {posts.map(post => (
-            <PostCard
-              title={post.data.title}
-              date={post.data.date}
-              summary={post.data.summary}
-              canonicalUrl={post.data.canonicalUrl}
-              platform={post.data.platform}
-              tags={post.data.tags}
-              slug={postSlug(post.id)}
-            />
-          ))}
-        </div>
-        <div class="section-cta">
-          <a href="/writing" class="btn btn-ghost">All writing →</a>
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- ── CONTACT ────────────────────────────────────────────── -->
   <section class="section section--surface" id="contact">
@@ -179,8 +258,8 @@ const services = [
         <span class="section-label">Contact</span>
         <h2>Let's talk.</h2>
         <p>
-          I'm selective about new engagements - I take on work where I can make a real
-          difference. Tell me what you're building and where you're stuck.
+          I'm open to podcast appearances, speaking, guest writing and the occasional
+          advisory engagement. Tell me what you're working on.
         </p>
         <p>I typically respond within one business day.</p>
 
@@ -193,24 +272,51 @@ const services = [
           </div>
           <div class="contact-item">
             <span class="contact-label">LinkedIn</span>
-            <a href="https://www.linkedin.com/in/gareth-williams-solutions-consultant/" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" class="contact-link">
               gareth-williams-solutions-consultant →
             </a>
           </div>
         </div>
       </div>
 
-      <div class="contact-card">
+      <div class="contact-card sidebar-card">
         <h3>What to include</h3>
         <ul>
-          <li>What you're building or trying to solve</li>
+          <li>Whether you're inviting me to speak, appear on a podcast, or commission a guest piece</li>
+          <li>What you're building or writing about and what perspective you're after</li>
           <li>The scale and timeline you're working to</li>
-          <li>Whether you need advisory or something longer</li>
-          <li>Your role and who else is involved</li>
+          <li>Whether you need advisory, a guest piece, or something longer</li>
         </ul>
       </div>
     </div>
   </section>
+
+
+<script>
+/* ── WIRE DIVIDER TRACE ─────────────────────────────────── */
+const wire = document.querySelector('.wire-divider')
+if (wire) {
+  const wo = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { wire.classList.add('traced'); wo.disconnect() }
+  }, { threshold: 0.5 })
+  wo.observe(wire)
+}
+
+/* ── SCROLL-REVEAL: service cards ───────────────────────── */
+const reveal = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view')
+      reveal.unobserve(entry.target)
+    }
+  })
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
+
+document.querySelectorAll('.service-card').forEach((el, i) => {
+  ;(el as HTMLElement).style.transitionDelay = `${i * 0.08}s`
+  reveal.observe(el)
+})
+</script>
 
 </Base>
 
@@ -231,8 +337,6 @@ const services = [
     max-width: 760px;
   }
 
-  .hero-badge { margin-bottom: 0.125rem; }
-
   .hero-title {
     font-size: clamp(2.5rem, 6vw, 4.25rem);
     font-weight: 700;
@@ -249,14 +353,36 @@ const services = [
 
   .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
 
-  .hero-glow {
-    position: absolute;
-    top: -160px;
-    right: -200px;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(circle, rgba(91, 106, 208, 0.1) 0%, transparent 65%);
-    pointer-events: none;
+  .hero-inline-link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(91,106,208,0.35);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s;
+  }
+  .hero-inline-link:hover { text-decoration-color: var(--accent); }
+
+  /* Wire divider */
+  .wire-divider {
+    overflow: hidden;
+    line-height: 0;
+    height: 2px;
+  }
+
+  .wire-divider svg {
+    display: block;
+    width: 100%;
+    height: 2px;
+  }
+
+  .wire-line {
+    stroke-dasharray: 1100;
+    stroke-dashoffset: 1100;
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .wire-divider.traced .wire-line {
+    stroke-dashoffset: 0;
   }
 
   /* Proof belt */
@@ -294,6 +420,9 @@ const services = [
   .section { padding: 5.5rem 0; }
   .section--surface { background: var(--surface); }
 
+  /* Contact sits last — trim excess bottom space */
+  #contact.section { padding-bottom: 4rem; }
+
   .section-header {
     display: flex;
     flex-direction: column;
@@ -316,22 +445,31 @@ const services = [
   /* Services */
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
     gap: 1.125rem;
   }
 
   .service-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(228,228,231,0.6);
     border-radius: var(--radius);
     padding: 1.625rem;
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.5s;
+    opacity: 0;
+    transform: translateY(28px);
   }
 
-  .service-card:hover {
+  .service-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-card.in-view:hover {
     border-color: var(--accent);
     box-shadow: var(--shadow-accent);
     transform: translateY(-2px);
@@ -411,60 +549,14 @@ const services = [
     top: 5rem;
   }
 
-  .avatar-initials {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, var(--accent) 0%, #7B87E0 100%);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: -0.02em;
-    box-shadow: var(--shadow-accent);
-  }
-
-  .about-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-  }
-
-  .about-card h3 {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .about-card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .about-card li {
-    font-size: 0.875rem;
-    color: var(--text);
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.4;
-  }
-
   .about-card li::before {
-    content: '→';
+    content: '✓';
     position: absolute;
     left: 0;
     color: var(--mint);
-    font-size: 0.75rem;
-    top: 0.1em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    top: 0.05em;
   }
 
   /* Writing */
@@ -517,41 +609,101 @@ const services = [
   .contact-link:hover { opacity: 0.75; }
 
   .contact-card {
-    background: var(--accent-light);
-    border-radius: var(--radius);
-    padding: 1.5rem;
     position: sticky;
     top: 5rem;
   }
 
-  .contact-card h3 {
-    font-size: 0.875rem;
+  .contact-card li { counter-increment: card-item; }
+
+  .contact-card li::before {
+    content: counter(card-item);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 1rem;
+    height: 1rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-card ul { counter-reset: card-item; }
+
+  /* Speaking */
+  .section-header--wide { max-width: 640px; }
+
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .talk-card {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(228,228,231,0.6);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .talk-card h3 {
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: 1rem;
     color: var(--text);
   }
 
-  .contact-card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
-  }
-
-  .contact-card li {
-    font-size: 0.9rem;
+  .talk-card p {
     color: var(--muted);
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.4;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: none;
   }
 
-  .contact-card li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: 700;
+  .speaking-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .speaking-bio {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+
+  .bio-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    max-width: none;
+  }
+
+  .bio-block {
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem 1.25rem;
+    background: var(--accent-light);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 68ch;
+    font-style: normal;
+    margin: 0;
   }
 
   @media (max-width: 768px) {
@@ -559,5 +711,7 @@ const services = [
     .contact-inner { grid-template-columns: 1fr; }
     .about-avatar { position: static; flex-direction: row; align-items: flex-start; }
     .contact-card { position: static; }
+    .speaking-ctas { flex-direction: column; }
+    .speaking-ctas .btn { text-align: center; justify-content: center; }
   }
 </style>

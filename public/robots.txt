@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itinerateconsulting.com/sitemap-index.xml

@@ -42,16 +42,78 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background: var(--bg);
 }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* ── Fixed background layer ───────────────────────────────── */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bg-blob-1 {
+  width: 850px; height: 850px;
+  background: radial-gradient(circle, rgba(91,106,208,0.56) 0%, transparent 68%);
+  top: -320px; right: -220px;
+  filter: blur(50px);
+}
+
+.bg-blob-2 {
+  width: 650px; height: 650px;
+  background: radial-gradient(circle, rgba(107,207,186,0.48) 0%, transparent 68%);
+  top: 45vh; left: -250px;
+  filter: blur(50px);
+}
+
+.bg-blob-3 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(91,106,208,0.40) 0%, transparent 68%);
+  bottom: -100px; right: 20%;
+  filter: blur(50px);
+}
+
+.bg-blob-4 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(107,207,186,0.34) 0%, transparent 68%);
+  top: 70vh; right: -100px;
+  filter: blur(55px);
+}
+
+.bg-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -102,12 +164,18 @@ main { flex: 1; }
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: background 0.15s, transform 0.1s;
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
   cursor: pointer;
   border: none;
 }
 
-.btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(91, 106, 208, 0.28);
+}
+
+.btn:active { transform: translateY(0); transition-duration: 0.06s; }
 
 .btn-ghost {
   background: transparent;
@@ -115,7 +183,13 @@ main { flex: 1; }
   border: 1.5px solid var(--accent);
 }
 
-.btn-ghost:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-ghost:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(91, 106, 208, 0.15);
+}
+
+.btn-ghost:active { transform: translateY(0); transition-duration: 0.06s; }
 
 /* Shared label above section headings */
 .section-label {
@@ -137,4 +211,64 @@ main { flex: 1; }
   border-radius: 99px;
   font-weight: 500;
   font-size: 0.75rem;
+}
+
+/* ── Shared sidebar card — about + contact variants ──────── */
+.sidebar-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(228,228,231,0.55);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidebar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--mint) 100%);
+}
+
+.sidebar-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.sidebar-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.sidebar-card li {
+  font-size: 0.875rem;
+  color: var(--text);
+  padding-left: 1.375rem;
+  position: relative;
+  line-height: 1.45;
+}
+
+/* ── Surface transparency — lets the bg blobs bleed through ── */
+/* White surface sections become frosted glass */
+.section--surface {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* Proof belt */
+.proof-belt {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }

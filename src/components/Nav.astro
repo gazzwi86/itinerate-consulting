@@ -1,12 +1,10 @@
 ---
 import { SOCIAL, CONTACT_EMAIL } from '../config/site'
 
-const onWriting = Astro.url.pathname.startsWith('/writing')
-
 const navLinks = [
-  { href: '/#services', label: 'Services' },
+  { href: '/#writing', label: 'Writing' },
+  { href: '/#speaking', label: 'Speaking' },
   { href: '/#about', label: 'About' },
-  { href: '/writing', label: 'Writing' },
 ]
 
 const socialLinks = [
@@ -42,7 +40,7 @@ const socialLinks = [
     <ul class="nav-links">
       {navLinks.map(({ href, label }) => (
         <li>
-          <a href={href} class:list={['nav-link', { 'nav-link--active': href === '/writing' && onWriting }]}>
+          <a href={href} class="nav-link">
             {label}
           </a>
         </li>

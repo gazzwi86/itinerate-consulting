@@ -95,8 +95,26 @@ const ogImageUrl = new URL(ogImage, Astro.site)
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,450;0,14..32,500;1,14..32,400&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Google Analytics -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3C0BDFJ691"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3C0BDFJ691');
+    </script>
   </head>
   <body>
+    <!-- Fixed background layer — sits behind all page content -->
+    <div class="bg-layer" aria-hidden="true">
+      <canvas id="bg-canvas"></canvas>
+      <div class="bg-blob bg-blob-1"></div>
+      <div class="bg-blob bg-blob-2"></div>
+      <div class="bg-blob bg-blob-3"></div>
+      <div class="bg-blob bg-blob-4"></div>
+      <div class="bg-grain"></div>
+    </div>
     <Nav />
     <main>
       <slot />
@@ -104,11 +122,108 @@ const ogImageUrl = new URL(ogImage, Astro.site)
     <Footer />
   </body>
   <script>
-    /* Single global handler for all obfuscated email links */
+    /* ── BACKGROUND: particle graph + blob animation ─────── */
+    const _reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    /* ── Particle graph ──────────────────────────────────── */
+    const _canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null
+    if (_canvas && !_reduced) {
+      const _ctx = _canvas.getContext('2d')!
+      const LINK = 145
+      const LINE_W = 1.2        // max line width (scales with proximity)
+      const LINK_ALPHA = 0.46   // max link alpha
+      const NODE_ALPHA = 0.52   // core node alpha
+      type Pt = { x:number; y:number; vx:number; vy:number; r:number }
+      let _pts: Pt[] = [], _W = 0, _H = 0
+
+      function _resize() {
+        _W = window.innerWidth; _H = window.innerHeight
+        _canvas.width = _W * devicePixelRatio
+        _canvas.height = _H * devicePixelRatio
+        _ctx.scale(devicePixelRatio, devicePixelRatio)
+        const n = _W < 640 ? 35 : 70
+        _pts = Array.from({ length: n }, () => ({
+          x: Math.random() * _W, y: Math.random() * _H,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 2.0 + 1.0,  // 1.0–3.0 px
+        }))
+      }
+
+      const LINK2 = LINK * LINK
+
+      function _tick() {
+        _ctx.clearRect(0, 0, _W, _H)
+        for (const p of _pts) {
+          p.x = (p.x + p.vx + _W) % _W
+          p.y = (p.y + p.vy + _H) % _H
+        }
+        for (let i = 0; i < _pts.length; i++) {
+          for (let j = i + 1; j < _pts.length; j++) {
+            const dx = _pts[i].x - _pts[j].x, dy = _pts[i].y - _pts[j].y
+            const d2 = dx*dx + dy*dy
+            if (d2 < LINK2) {
+              const d = Math.sqrt(d2)
+              const t = 1 - d / LINK
+              const mx = (_pts[i].x + _pts[j].x) / 2
+              const isMint = mx > _W * 0.5
+              const col = isMint ? `rgba(107,207,186,${t * LINK_ALPHA})` : `rgba(91,106,208,${t * LINK_ALPHA})`
+              _ctx.strokeStyle = col
+              _ctx.lineWidth = Math.max(0.4, t * LINE_W)
+              _ctx.beginPath()
+              _ctx.moveTo(_pts[i].x, _pts[i].y)
+              _ctx.lineTo(_pts[j].x, _pts[j].y)
+              _ctx.stroke()
+            }
+          }
+        }
+        for (const p of _pts) {
+          const isMint = p.x > _W * 0.55
+          const c = isMint ? '107,207,186' : '91,106,208'
+          // Soft glow halo
+          _ctx.fillStyle = `rgba(${c},0.09)`
+          _ctx.beginPath()
+          _ctx.arc(p.x, p.y, p.r * 2.4, 0, Math.PI * 2)
+          _ctx.fill()
+          // Core dot
+          _ctx.fillStyle = `rgba(${c},${NODE_ALPHA})`
+          _ctx.beginPath()
+          _ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+          _ctx.fill()
+        }
+        requestAnimationFrame(_tick)
+      }
+
+      _resize()
+      _tick()
+      window.addEventListener('resize', _resize)
+    }
+
+    /* ── Blob animation: oscillation + scroll parallax ───── */
+    if (!_reduced) {
+      const _b1 = document.querySelector('.bg-blob-1') as HTMLElement | null
+      const _b2 = document.querySelector('.bg-blob-2') as HTMLElement | null
+      const _b3 = document.querySelector('.bg-blob-3') as HTMLElement | null
+      const _b4 = document.querySelector('.bg-blob-4') as HTMLElement | null
+      let _sy = 0
+      window.addEventListener('scroll', () => { _sy = window.scrollY }, { passive: true })
+      const _t0 = performance.now()
+
+      function _blobAnim() {
+        const t = (performance.now() - _t0) / 1000
+        if (_b1) _b1.style.transform = `translate(${Math.sin(t*0.29)*90}px,${Math.cos(t*0.19)*65+_sy*0.12}px) scale(${1+Math.sin(t*0.13)*0.08})`
+        if (_b2) _b2.style.transform = `translate(${Math.cos(t*0.37)*78}px,${Math.sin(t*0.25)*88-_sy*0.08}px) scale(${1+Math.cos(t*0.16)*0.10})`
+        if (_b3) _b3.style.transform = `translate(${Math.sin(t*0.23)*65}px,${Math.cos(t*0.31)*60+_sy*0.18}px) scale(${1+Math.sin(t*0.19)*0.12})`
+        if (_b4) _b4.style.transform = `translate(${Math.cos(t*0.41)*55}px,${Math.sin(t*0.28)*50-_sy*0.14}px) scale(${1+Math.cos(t*0.22)*0.09})`
+        requestAnimationFrame(_blobAnim)
+      }
+      _blobAnim()
+    }
+
+    /* ── EMAIL OBFUSCATION ───────────────────────────────── */
     document.querySelectorAll<HTMLAnchorElement>('[data-u][data-d]').forEach(el => {
       const addr = `${el.dataset.u}@${el.dataset.d}`
       el.href = `mailto:${addr}`
-      // Only replace text if it's a display-only text node — not if it contains child elements (e.g. SVG icons)
       if (el.children.length === 0 && el.textContent?.includes('[at]')) {
         el.textContent = addr
       }
