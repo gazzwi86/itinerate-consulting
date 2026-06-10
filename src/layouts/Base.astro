@@ -21,7 +21,7 @@ const {
 } = Astro.props
 
 const siteName = 'Itinerate Consulting'
-const fullTitle = title === siteName ? title : `${title} — ${siteName}`
+const fullTitle = title === siteName ? title : `${title} - ${siteName}`
 ---
 
 <!doctype html>
@@ -65,7 +65,7 @@ const fullTitle = title === siteName ? title : `${title} — ${siteName}`
           '@type': 'Person',
           name: 'Gareth Williams',
           url: SITE_URL,
-          jobTitle: 'Principal Solutions Architect',
+          jobTitle: 'Principal Solutions Consultant',
           description: 'Writer behind Prompt to Prod. Practitioner focused on agentic engineering, AI governance and shipping AI in production.',
           knowsAbout: ['Agentic Engineering', 'AI-Native Architecture', 'AI Governance', 'Engineering Leadership', 'Comprehension Debt'],
           worksFor: { '@type': 'Organization', name: siteName, url: SITE_URL },

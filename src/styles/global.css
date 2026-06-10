@@ -201,6 +201,19 @@ main { flex: 1; }
 
 .btn-ghost:active { transform: translateY(0); transition-duration: 0.06s; }
 
+.btn-tertiary {
+  background: transparent;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  font-size: 0.875rem;
+}
+.btn-tertiary:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  box-shadow: none;
+}
+
 /* Shared label above section headings */
 .section-label {
   display: block;

@@ -58,7 +58,7 @@ const talks = [
       </p>
       <div class="hero-actions fade-up fade-up-3">
         <a href="#writing" class="btn">Read the writing <span aria-hidden="true">→</span></a>
-        <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="hero-sub-link">Subscribe to Prompt to Prod <span aria-hidden="true">→</span></a>
+        <a href={`${SOCIAL.newsletter}?utm_source=itinerate&utm_medium=referral&utm_campaign=home-hero`} target="_blank" rel="noopener noreferrer" class="btn btn-tertiary">Subscribe to Prompt to Prod <span aria-hidden="true">→</span></a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
     </div>
@@ -163,7 +163,7 @@ const talks = [
       <div class="speaking-bio">
         <p class="bio-label">Copy-paste bio (50 words)</p>
         <blockquote class="bio-block">
-          Gareth Williams is a Principal Solutions Architect and the writer behind Prompt to Prod.
+          Gareth Williams is a Principal Solutions Consultant at Versent and the writer behind Prompt to Prod.
           He has spent 15+ years building software across banking, energy, government and retail,
           and now focuses on agentic engineering and AI governance. He writes and speaks about what
           AI actually changes for engineering teams, not the hype.
@@ -437,8 +437,6 @@ if (form) {
     transition: text-decoration-color 0.15s;
   }
   .hero-inline-link:hover { text-decoration-color: var(--accent); }
-  .hero-sub-link { color: var(--accent); font-size: 0.9rem; text-decoration: underline; text-decoration-color: rgba(91,106,208,0.35); text-underline-offset: 2px; transition: text-decoration-color 0.15s; }
-  .hero-sub-link:hover { text-decoration-color: var(--accent); }
 
   /* Wire divider */
   .wire-divider {
@@ -498,7 +496,7 @@ if (form) {
   .section { padding: 5.5rem 0; }
   .section--surface { background: var(--surface); }
 
-  /* Contact sits last — trim excess bottom space */
+  /* Contact sits last - trim excess bottom space */
   #contact.section { padding-bottom: 4rem; }
 
   .section-header {
